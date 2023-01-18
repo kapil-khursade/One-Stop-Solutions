@@ -23,5 +23,4 @@ public class Login {
 	private String type;
 	private boolean isActive;
 	
-	
 }
