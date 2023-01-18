@@ -1,0 +1,113 @@
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(193, 192, 192);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(169, 168, 168);
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(235, 235, 237);
+}
+navbar{
+    width: 100vw;
+    margin-left: -8px;
+    margin-top: -8px;
+    background-color: rgb(246, 244, 244);
+    position: fixed;
+    z-index: 1000;
+}
+.navbar{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar>img{
+    width: 100px;
+}
+/* .navbar .loginBtn{
+    margin-right: 10px;
+    border: 0px;
+    background-color: transparent;
+    font-size: 24px;
+} */
+.navbar .consumerMenu{
+    display: block;
+}
+.navbar .consumerBtn{
+    margin-right: 10px;
+    border: 0px;
+    border-radius: 50px;
+    padding: 7px 10px; 
+    background-color: transparent;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar .consumerBtn:hover{
+    background-color: black;
+    color: white;
+}
+.navbar .buisnessBtn{
+    margin-right: 40px;
+    border-radius: 50px;
+    border: 0px;
+    padding: 7px 10px; 
+    background-color: transparent;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar .buisnessBtn:hover{
+    background-color: black;
+    color: white;
+}
+.home{
+    width: 99.4vw;
+    margin: auto;
+    margin-left: -8px;
+}
+.home>div{
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 5px;
+}
+.home>div>p{
+    font-size: 20px;
+    margin-top: 70px;
+    color: rgb(250, 244, 244);
+    mix-blend-mode:difference;
+}
+.home>div>h1{
+    color: rgb(249, 152, 152);
+    font-size: 55px;
+    mix-blend-mode:difference;
+}
+footer{
+    border-top: 1.35px solid gainsboro;
+}
+footer>div{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+footer>div>div{
+    display: flex;
+    gap: 20px;
+    font-size: 25px;
+}
