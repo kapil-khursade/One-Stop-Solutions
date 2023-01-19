@@ -11,80 +11,80 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalOperatorExceptionHandler {
 
 	// exception handler for operator
 
 	@ExceptionHandler(OperatorException.class)
-	public ResponseEntity<MyErrorBean> operatorExceptionHandler(OperatorException oe, WebRequest req) {
+	public ResponseEntity<MyOperatorErrorBean> operatorExceptionHandler(OperatorException oe, WebRequest req) {
 
-		MyErrorBean err = new MyErrorBean();
+		MyOperatorErrorBean err = new MyOperatorErrorBean();
 
 		err.setTimestamp(LocalDateTime.now());
 		err.setMessage(oe.getMessage());
 		err.setDetails(req.getDescription(false));
 
-		return new ResponseEntity<MyErrorBean>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyOperatorErrorBean>(err, HttpStatus.BAD_REQUEST);
 
 	}
 
 	// exception handler for solution
 
 	@ExceptionHandler(SolutionException.class)
-	public ResponseEntity<MyErrorBean> solutionExceptionHandler(SolutionException se, WebRequest req) {
+	public ResponseEntity<MyOperatorErrorBean> solutionExceptionHandler(SolutionException se, WebRequest req) {
 
-		MyErrorBean err = new MyErrorBean();
+		MyOperatorErrorBean err = new MyOperatorErrorBean();
 
 		err.setTimestamp(LocalDateTime.now());
 		err.setMessage(se.getMessage());
 		err.setDetails(req.getDescription(false));
 
-		return new ResponseEntity<MyErrorBean>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyOperatorErrorBean>(err, HttpStatus.BAD_REQUEST);
 
 	}
 
 	// generic exception handler
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<MyErrorBean> genericExceptionHandler(Exception e, WebRequest req) {
+	public ResponseEntity<MyOperatorErrorBean> genericExceptionHandler(Exception e, WebRequest req) {
 
-		MyErrorBean err = new MyErrorBean();
+		MyOperatorErrorBean err = new MyOperatorErrorBean();
 
 		err.setTimestamp(LocalDateTime.now());
 		err.setMessage(e.getMessage());
 		err.setDetails(req.getDescription(false));
 
-		return new ResponseEntity<MyErrorBean>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyOperatorErrorBean>(err, HttpStatus.BAD_REQUEST);
 
 	}
 
 	// if no exception handler is found
 
 	@ExceptionHandler(NoHandlerFoundException.class)
-	public ResponseEntity<MyErrorBean> myExceptionHandler(NoHandlerFoundException nhfe, WebRequest req) {
+	public ResponseEntity<MyOperatorErrorBean> myExceptionHandler(NoHandlerFoundException nhfe, WebRequest req) {
 
-		MyErrorBean err = new MyErrorBean();
+		MyOperatorErrorBean err = new MyOperatorErrorBean();
 
 		err.setTimestamp(LocalDateTime.now());
 		err.setMessage(nhfe.getMessage());
 		err.setDetails(req.getDescription(false));
 
-		return new ResponseEntity<MyErrorBean>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyOperatorErrorBean>(err, HttpStatus.BAD_REQUEST);
 
 	}
 
 	// if method argument is not valid
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<MyErrorBean> myMANVExceptionHandler(MethodArgumentNotValidException manve) {
+	public ResponseEntity<MyOperatorErrorBean> myMANVExceptionHandler(MethodArgumentNotValidException manve) {
 
-		MyErrorBean err = new MyErrorBean();
+		MyOperatorErrorBean err = new MyOperatorErrorBean();
 
 		err.setTimestamp(LocalDateTime.now());
 		err.setMessage(manve.getBindingResult().getFieldError().getDefaultMessage());
 		err.setDetails("Validation error");
 
-		return new ResponseEntity<MyErrorBean>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyOperatorErrorBean>(err, HttpStatus.BAD_REQUEST);
 
 	}
 }
