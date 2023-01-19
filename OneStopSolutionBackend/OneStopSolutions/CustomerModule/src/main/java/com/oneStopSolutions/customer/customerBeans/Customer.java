@@ -1,19 +1,25 @@
 package com.oneStopSolutions.customer.customerBeans;
 
-import java.time.LocalDateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 public class Customer {
 	
@@ -25,5 +31,8 @@ public class Customer {
 	private String email;
 	private String mobile;
 	private String city;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Issue> issues = new ArrayList<>();
 	
 }
