@@ -1,6 +1,7 @@
 package com.oneStopSolutions.operator.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.repository.CustomerRepository;
+import com.oneStopSolutions.customer.repository.IssueRepository;
+import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
 import com.oneStopSolutions.operator.exception.OperatorException;
@@ -28,13 +31,19 @@ public class OperatorServiceImpl implements OperatorService {
 	private SolutionDao solutionDao;
 	
 	@Autowired
-	private CustomerRepository customerRepository;
+	private CustomerRepository customerDao;
+	
+	@Autowired
+	private LoginRepository loginDao;
+	
+	@Autowired
+	private IssueRepository issueDao;
 	
 	
 	@Override
 	public Operator loginOperator(Login login) throws OperatorException {
 		
-		
+		Operator LoggedOperator;
 		
 		
 		return null;
@@ -43,8 +52,8 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public List<Issue> getIssueByCustomerId(Integer Id) throws OperatorException {
-		
-		
+	
+
 		
 		return null;
 	}
@@ -73,7 +82,9 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public Customer getCustomrById(Integer Id) throws OperatorException {
-		// TODO Auto-generated method stub
+		
+//		Customer customer=customerDao.getById(Id);
+		
 		return null;
 	}
 
