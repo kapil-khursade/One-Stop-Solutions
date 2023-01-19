@@ -1,4 +1,4 @@
-package com.oneStopSolutions.customer.Beans;
+package com.oneStopSolutions.customer.customerBeans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
