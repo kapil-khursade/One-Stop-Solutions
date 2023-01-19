@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.oneStopSolutions.customer.customerBeans.Login;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,9 @@ public class Operator {
 	private String operatorEmail;
 	private String operatorMobile;
 	private String operatorType;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operator")
 	private Set<Solution> solutions=new HashSet<Solution>();
