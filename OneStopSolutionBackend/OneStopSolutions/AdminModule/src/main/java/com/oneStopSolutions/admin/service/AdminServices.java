@@ -5,10 +5,10 @@ import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
 import com.oneStopSolutions.admin.model.Department;
-import com.oneStopSolutions.customer.Beans.Login;
-import com.oneStopSolutions.customer.Beans.Output;
+import com.oneStopSolutions.customer.customerBeans.Login;
+import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
-import org.hibernate.usertype.LoggableUserType;
+
 
 import java.util.List;
 

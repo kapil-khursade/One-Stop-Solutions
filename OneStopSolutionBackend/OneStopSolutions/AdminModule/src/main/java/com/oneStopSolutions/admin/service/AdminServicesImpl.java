@@ -7,8 +7,8 @@ import com.oneStopSolutions.admin.model.Department;
 import com.oneStopSolutions.admin.repository.AdminDao;
 import com.oneStopSolutions.admin.repository.DepartmentDao;
 import com.oneStopSolutions.admin.repository.EmployeeDao;
-import com.oneStopSolutions.customer.Beans.Login;
-import com.oneStopSolutions.customer.Beans.Output;
+import com.oneStopSolutions.customer.customerBeans.Login;
+import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.repository.OperatorDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,16 +57,21 @@ public class AdminServicesImpl implements AdminServices{
 
     @Override
     public Admin adminLogin(Login login) throws AdminException {
+
+/*        String userId = login.getUsername();
+        String password = login.getPassword();
+
+        employeeDao.
+        */
         return null;
     }
 
 
     //create department
-
     @Override
     public Output createDepartment(Department department) throws DepartmentException {
 
-//        adminDao.save(department);
+        departmentDao.save(department);
 
         Output output = new Output();
         output.setTimestamp(LocalDateTime.now());
@@ -77,7 +82,6 @@ public class AdminServicesImpl implements AdminServices{
 
 
     //Delete Department By Id
-
     @Override
     public Output deleteDepartmentById(Integer id) throws DepartmentException {
         Optional<Department> opt = departmentDao.findById(id);
@@ -98,8 +102,8 @@ public class AdminServicesImpl implements AdminServices{
             throw new DepartmentException("Department does not exist with id :" + id);
     }
 
-    //Update Department Name By Id
 
+    //Update Department Name By Id
     @Override
     public Output updateDepartmentNameById(Integer id, String name) throws DepartmentException {
 
@@ -110,7 +114,6 @@ public class AdminServicesImpl implements AdminServices{
 
             Department existDepartment = opt.get();
             existDepartment.setDepartmentName(name);
-
 
             departmentDao.save(existDepartment);
 
@@ -124,8 +127,8 @@ public class AdminServicesImpl implements AdminServices{
             throw new DepartmentException("Department does not exist with id :"+id);
     }
 
-    //Get All Department
 
+    //Get All Department
     @Override
     public List<Department> getAllDepartment() throws DepartmentException {
         List<Department> departments= departmentDao.findAll();
@@ -136,16 +139,16 @@ public class AdminServicesImpl implements AdminServices{
         return departments;
     }
 
-    //Get Department By Id
 
+    //Get Department By Id
     @Override
     public Department getDepartmentById(Integer id) throws DepartmentException {
         return departmentDao.findById(id).orElseThrow(() -> new DepartmentException("Department does not exist with id :"+id) );
 
     }
 
-    // Create new Operator
 
+    // Create new Operator
     @Override
     public Output addOperator(Operator operator) throws AdminException {
 
@@ -160,8 +163,8 @@ public class AdminServicesImpl implements AdminServices{
         }
     }
 
-    //Remove Operator By Id
 
+    //Remove Operator By Id
     @Override
     public Output removeOperatorById(Integer id) throws AdminException {
         Optional<Operator> opt = operatorDao.findById(id);
@@ -182,22 +185,35 @@ public class AdminServicesImpl implements AdminServices{
             throw new AdminException("Operator does not exist with id :" + id);
     }
 
-    //Update Operator
 
+    //Update Operator
     @Override
     public Output updateOperator(Operator operator) throws AdminException {
-        return null;
+
+        Output output = new Output();
+        if(operator != null) {
+            Operator opt = operatorDao.save(operator);
+            output.setMessage("Update Sucessfully");
+            output.setTimestamp(LocalDateTime.now());
+
+
+            return output;
+        }
+
+
+        throw new AdminException("Operaor is null");
+
     }
+
 
     //Get Operator By Id
-
     @Override
     public Operator getOperatorById(Integer id) throws AdminException {
-        return operatorDao.findById(id).orElseThrow(() -> new AdminException("Operator does not exist with roll :"+id) );
+        return operatorDao.findById(id).orElseThrow(() -> new AdminException("Operator does not exist with id :"+id) );
     }
 
-    //Get All Operator
 
+    //Get All Operator
     @Override
     public List<Operator> getAllOperator() throws AdminException {
         List<Operator> operators= operatorDao.findAll();
