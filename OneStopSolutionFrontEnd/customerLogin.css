@@ -1,0 +1,75 @@
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(193, 192, 192);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(169, 168, 168);
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(235, 235, 237);
+}
+.userSign{
+    width:90px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-size: 55px;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 40%;
+    background-color: rgb(243, 106, 56);
+    color: white;
+}
+form{
+    width: 28vw;
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 35px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+form>input{
+    padding: 14px 10px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgb(236, 233, 233);
+    font-family: 'Poppins', sans-serif;
+    color: rgb(243, 106, 56);
+}
+form>input:nth-child(6){
+    background-color: rgb(243, 106, 56);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: 3px solid rgb(243, 106, 56);
+}
+form>input:nth-child(6):hover{
+    background-color: white;
+    border: 3px solid rgb(243, 106, 56);
+    color: rgb(243, 106, 56);
+    cursor: pointer;
+}
+form>label{
+    margin-left: 4px;
+    margin-bottom: 7px;
+    color: rgb(243, 106, 56);
+}
+form>p{
+    text-align: center;
+    margin-top: -5px;
+    font-size: 13px;
+}
+form>p>a{
+    text-decoration: none;
+    color: orangered;
+}
