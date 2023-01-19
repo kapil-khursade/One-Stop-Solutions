@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyErrorDetails {
+public class MyErrorDetailsCustomer {
 	
 	private LocalDateTime timestamp;
 	private String message;
