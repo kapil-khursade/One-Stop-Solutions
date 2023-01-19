@@ -33,8 +33,8 @@ public class Operator {
 	private String operatorMobile;
 	private String operatorType;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private Login login;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operator")
 	private Set<Solution> solutions=new HashSet<Solution>();
