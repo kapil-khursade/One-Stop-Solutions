@@ -1,8 +1,7 @@
-package com.oneStopSolution.Admin.model;
+package com.oneStopSolutions.admin.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 

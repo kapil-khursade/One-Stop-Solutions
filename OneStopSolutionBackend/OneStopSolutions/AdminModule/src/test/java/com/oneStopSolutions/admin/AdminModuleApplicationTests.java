@@ -1,4 +1,4 @@
-package com.oneStopSolution.Admin;
+package com.oneStopSolutions.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
