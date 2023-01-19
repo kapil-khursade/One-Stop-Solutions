@@ -31,6 +31,54 @@ navbar{
     justify-content: space-between;
     align-items: center;
 }
+.navbar>div{
+    display: flex;
+}
+.navbar>div>li{
+    width: 150px;
+    /* margin: auto; */
+    list-style: none;
+}
+.buisnessMenu, .consumerMenu{
+    width: 65px;
+    margin: auto;
+    margin-left: 0px;
+    display: none;
+    border-radius: 20px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid black;
+}
+.buisnessMenu{
+    width: 56px;
+}
+.buisnessMenu>li, .consumerMenu>li{
+    width: 98px;
+    list-style: none;
+    text-align: center;
+    margin-left: -37px;
+    line-height: 35px;
+}
+.buisnessMenu>li>a, .consumerMenu>li>a{
+    text-decoration: none;
+    color: black;
+}
+.buisnessMenu>li:nth-child(1):hover, .consumerMenu>li:nth-child(1):hover{
+    background-color: rgb(178, 178, 180);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.buisnessMenu>li:nth-child(2):hover, .consumerMenu>li:nth-child(2):hover{
+    background-color: rgb(178, 178, 180);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.buisnessMenu>li{
+    width: 90px;
+}
+.buisnessMenu>li:nth-child(1), .consumerMenu>li:nth-child(1){
+    border-bottom: 1px solid black;
+}
 .navbar>img{
     width: 100px;
 }
@@ -40,9 +88,9 @@ navbar{
     background-color: transparent;
     font-size: 24px;
 } */
-.navbar .consumerMenu{
+/* .navbar .consumerMenu{
     display: block;
-}
+} */
 .navbar .consumerBtn{
     margin-right: 10px;
     border: 0px;
@@ -57,6 +105,12 @@ navbar{
 .navbar .consumerBtn:hover{
     background-color: black;
     color: white;
+}
+.navbar>div>li:nth-child(1):hover .consumerMenu{
+    display: block;
+}
+.navbar>div>li:nth-child(2):hover .buisnessMenu{
+    display: block;
 }
 .navbar .buisnessBtn{
     margin-right: 40px;
