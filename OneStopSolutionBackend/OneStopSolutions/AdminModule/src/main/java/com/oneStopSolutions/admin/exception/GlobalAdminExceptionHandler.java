@@ -45,7 +45,7 @@ public class GlobalAdminExceptionHandler {
 
 	//Handler for Employee Exception
 
-	@ExceptionHandler(EmployeeException.class)
+	@ExceptionHandler(DepartmentException.class)
 	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler3(DepartmentException ae, WebRequest req) {
 
 		MyErrorAdminBean err = new MyErrorAdminBean();

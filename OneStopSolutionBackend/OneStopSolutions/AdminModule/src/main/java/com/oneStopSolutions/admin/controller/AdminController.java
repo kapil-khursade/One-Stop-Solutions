@@ -17,13 +17,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class CustomerController {
+public class AdminController {
 
     @Autowired
     private AdminServices adminService;
 
     //Register Admin
-    @PostMapping("/")
+    @PostMapping("/pot")
     public ResponseEntity<Output> registerAdminHandler(@RequestBody Admin admin) throws AdminException{
 
         Output output = adminService.registerAdmin(admin);
@@ -34,7 +34,7 @@ public class CustomerController {
     //Admin login
 
     //Create new  Department
-    @PostMapping("/")
+    @PostMapping("/d")
     public ResponseEntity<Output> createDepartmentHandler(@RequestBody Department department) throws DepartmentException {
 
         Output output = adminService.createDepartment(department);
