@@ -4,9 +4,8 @@ import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
 import com.oneStopSolutions.admin.model.Department;
-import com.oneStopSolutions.admin.repository.DepartmentDao;
 import com.oneStopSolutions.admin.service.AdminServices;
-import com.oneStopSolutions.customer.Beans.Output;
+import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +56,7 @@ public class CustomerController {
     //Update Department Name By Id
 
     @PatchMapping("/departments/{id}")
-    public ResponseEntity<Output> updateDepratmentNameById(@PathVariable("id") Integer id, @RequestParam String name)throws DepartmentException{
+    public ResponseEntity<Output> updateDepratmentNameByIdHandler(@PathVariable("id") Integer id, @RequestParam String name)throws DepartmentException{
 
         Output output = adminService.updateDepartmentNameById(id,name);
         return new ResponseEntity<>(output, HttpStatus.ACCEPTED);
@@ -67,7 +66,7 @@ public class CustomerController {
     //Get all Department
 
     @GetMapping("/departments")
-    public ResponseEntity<List<Department>> getAllDepartment()throws DepartmentException{
+    public ResponseEntity<List<Department>> getAllDepartmentHandler()throws DepartmentException{
 
         List<Department> departments = adminService.getAllDepartment();
         return new ResponseEntity<>(departments, HttpStatus.OK);
@@ -77,7 +76,7 @@ public class CustomerController {
     //Get Department By Id
 
     @GetMapping("/departments/{id}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") Integer id)throws DepartmentException{
+    public ResponseEntity<Department> getDepartmentByIdHandler(@PathVariable("id") Integer id)throws DepartmentException{
 
         Department department = adminService.getDepartmentById(id);
         return new ResponseEntity<>(department, HttpStatus.OK);
@@ -86,8 +85,8 @@ public class CustomerController {
 
     // Add new Operator
 
-    @PostMapping("/operators}")
-    public ResponseEntity<Output> addOperator(@RequestBody Operator operator)throws AdminException{
+    @PostMapping("/operators")
+    public ResponseEntity<Output> addOperatorHandler(@RequestBody Operator operator)throws AdminException{
 
         Output output = adminService.addOperator(operator);
 
@@ -97,15 +96,15 @@ public class CustomerController {
     // Remove Operator By Id
 
     @DeleteMapping("/operators/{id}")
-    public ResponseEntity<Output> removeOperatorById(Integer id)throws AdminException{
+    public ResponseEntity<Output> removeOperatorByIdHandler(@PathVariable("id") Integer id)throws AdminException{
         Output output = adminService.removeOperatorById(id);
         return new ResponseEntity<>(output, HttpStatus.ACCEPTED);
     }
 
     //Update Operator
 
-    @PutMapping("/operator}")
-    public ResponseEntity<Output> updateOperator(@RequestBody Operator operator)throws AdminException{
+    @PutMapping("/operator")
+    public ResponseEntity<Output> updateOperatorHandler(@RequestBody Operator operator)throws AdminException{
 
         Output output = adminService.updateOperator(operator);
 
@@ -116,7 +115,7 @@ public class CustomerController {
     // Get Operator By Id
 
     @GetMapping("/operator/{id}")
-    public ResponseEntity<Operator> getOperatorById(@PathVariable("id") Integer id)throws AdminException{
+    public ResponseEntity<Operator> getOperatorByIdHandler(@PathVariable("id") Integer id)throws AdminException{
 
         Operator operator = adminService.getOperatorById(id);
 
@@ -128,7 +127,7 @@ public class CustomerController {
     //Get All Operator
 
     @GetMapping("/operators")
-    public ResponseEntity<List<Operator>> getAllOperator()throws AdminException{
+    public ResponseEntity<List<Operator>> getAllOperatorHandler()throws AdminException{
 
         List<Operator> operators = adminService.getAllOperator();
         return new ResponseEntity<>(operators, HttpStatus.OK);
