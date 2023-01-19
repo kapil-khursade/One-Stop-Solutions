@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -17,10 +14,13 @@ import javax.persistence.Id;
 @Entity
 @ToString
 public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Integer employeeId;
 private String firstName;
 private String lastName;
 
+//bidirectional
+@ManyToOne(cascade = CascadeType.ALL)
+private Department department;
 }
