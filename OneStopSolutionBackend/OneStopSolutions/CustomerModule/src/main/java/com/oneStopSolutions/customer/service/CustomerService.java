@@ -14,15 +14,11 @@ public interface CustomerService {
 
 	public Output registerCustomer(Customer customer) throws CustomerException;
 
-//	public Customer customerLogin(Login login) throws LoginException;
-
-	public Output createIssue(Issue issue) throws IssueException;
+//	public Customer customerLogin(Login login) throws LoginException
 
 	public List<Issue> getAllIssuesByCustomerId(Integer Id) throws IssueException;
 
 //	public Issue getIssueId(Integer Id) throws IssueException;
-
-//	public Output deleteIssueId(Integer Id) throws IssueException;
 
 //	public Output reopenIssueById(Integer Id) throws IssueException;
 
