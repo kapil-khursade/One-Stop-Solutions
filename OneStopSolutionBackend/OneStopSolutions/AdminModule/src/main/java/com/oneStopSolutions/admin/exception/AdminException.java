@@ -1,4 +1,4 @@
-package com.oneStopSolution.Admin.exception;
+package com.oneStopSolutions.admin.exception;
 
 public class AdminException extends Exception{
     public AdminException() {

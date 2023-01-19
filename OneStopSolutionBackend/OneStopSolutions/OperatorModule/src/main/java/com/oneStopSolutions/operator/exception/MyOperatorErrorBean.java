@@ -2,21 +2,17 @@ package com.oneStopSolutions.operator.exception;
 
 import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-public class MyErrorBean {
+public class MyOperatorErrorBean {
 
 	private LocalDateTime timestamp;
 	private String message;
 	private String details;
 	
-	public MyErrorBean() {
+	public MyOperatorErrorBean() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MyErrorBean(LocalDateTime timestamp, String message, String details) {
+	public MyOperatorErrorBean(LocalDateTime timestamp, String message, String details) {
 		super();
 		this.timestamp = timestamp;
 		this.message = message;
