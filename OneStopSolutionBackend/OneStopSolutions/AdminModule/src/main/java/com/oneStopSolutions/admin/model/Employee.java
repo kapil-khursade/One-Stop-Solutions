@@ -1,4 +1,4 @@
-package com.oneStopSolution.Admin.model;
+package com.oneStopSolutions.admin.model;
 
 
 import lombok.AllArgsConstructor;
