@@ -49,14 +49,14 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/issue/{customerId}")
+	@GetMapping("/issue/all/{customerId}")
 	public ResponseEntity<List<Issue>> getAllIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId) {
 		List<Issue> issues = customerService.getAllIssuesByCustomerId(customerId);
 		
 		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
 	}
 	
-	@GetMapping("/issue/{issueId}")
+	@GetMapping("/issue/one/{issueId}")
 	public ResponseEntity<Issue> getIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Issue issue2 = customerService.getIssueId(issueId);
 		
