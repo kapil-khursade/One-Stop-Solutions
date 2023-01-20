@@ -16,7 +16,7 @@ public class GlobalAdminExceptionHandler {
 	//Handler for Admin Exception
 
 	@ExceptionHandler(AdminException.class)
-	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler1(AdminException ae, WebRequest req) {
+	public ResponseEntity<MyErrorAdminBean> ExceptionHandler1(AdminException ae, WebRequest req) {
 
 		MyErrorAdminBean err = new MyErrorAdminBean();
 
@@ -31,7 +31,7 @@ public class GlobalAdminExceptionHandler {
 	//Handler for Employee Exception
 
 	@ExceptionHandler(EmployeeException.class)
-	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler2(EmployeeException ae, WebRequest req) {
+	public ResponseEntity<MyErrorAdminBean> ExceptionHandler2(EmployeeException ae, WebRequest req) {
 
 		MyErrorAdminBean err = new MyErrorAdminBean();
 
@@ -45,7 +45,7 @@ public class GlobalAdminExceptionHandler {
 
 
 	@ExceptionHandler(DepartmentException.class)
-	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler3(DepartmentException ae, WebRequest req) {
+	public ResponseEntity<MyErrorAdminBean> ExceptionHandler3(DepartmentException ae, WebRequest req) {
 
 		MyErrorAdminBean err = new MyErrorAdminBean();
 
