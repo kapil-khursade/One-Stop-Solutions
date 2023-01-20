@@ -9,6 +9,6 @@ import com.oneStopSolutions.customer.customerBeans.Login;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
-	public Customer findByLogin(Login login);
+//	public Customer findByLogin(Login login);
 
 }

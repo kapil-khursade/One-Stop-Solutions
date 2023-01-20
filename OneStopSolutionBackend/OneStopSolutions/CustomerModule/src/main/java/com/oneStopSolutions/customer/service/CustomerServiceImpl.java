@@ -9,6 +9,7 @@ import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.customerBeans.UserType;
 import com.oneStopSolutions.customer.exception.CustomerException;
 import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.exception.LoginException;
@@ -39,6 +40,10 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		customerRepository.save(customer);
 		
+		customer.getLogin().setType(UserType.CUSTOMER);
+		
+		customer.getLogin().setActive(true);
+		
 		loginRepository.save(customer.getLogin());
 		
 		Output output = new Output();
@@ -55,22 +60,22 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer customerLogin(Login login) throws LoginException {
-		Login login2 = loginRepository.findByUsername(login.getUsername());
+//		Login login2 = loginRepository.findByUsername(login.getUsername());
+//		
+//		if(login2 == null ) {
+//			throw new LoginException("No A./c Found");
+//		}
+//		else if(!login2.getPassword().equals(login.getPassword())) {
+//			throw new LoginException("Pass Incorr");
+//		}
+//		
+//		Customer customer = customerRepository.findByLogin(login2);
+//		
+//		if(customer == null) {
+//			throw new CustomerException("Customer Not Found");
+//		}
 		
-		if(login2 == null ) {
-			throw new LoginException("No A./c Found");
-		}
-		else if(!login2.getPassword().equals(login.getPassword())) {
-			throw new LoginException("Pass Incorr");
-		}
-		
-		Customer customer = customerRepository.findByLogin(login2);
-		
-		if(customer == null) {
-			throw new CustomerException("Customer Not Found");
-		}
-		
-		return customer;
+		return null;
 	}
 
 	@Override

@@ -26,11 +26,11 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/login")
-	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody Login login) {
-		Customer output = customerService.customerLogin(login);
-		
-		return new ResponseEntity<Customer>(output, HttpStatus.ACCEPTED);
-	}
+//	@GetMapping("/login")
+//	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody Login login) {
+//		Customer output = customerService.customerLogin(login);
+//		
+//		return new ResponseEntity<Customer>(output, HttpStatus.ACCEPTED);
+//	}
 
 }
