@@ -12,6 +12,7 @@ import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.customerBeans.UserType;
+import com.oneStopSolutions.customer.dtoes.CustomerUpdatePasswordDto;
 import com.oneStopSolutions.customer.exception.CustomerException;
 import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.exception.LoginException;
@@ -33,10 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Output registerCustomer(Customer customer) throws CustomerException {
-		if (customer.getCity() != null && customer.getFirstName() != null && customer.getLastName() != null
-				&& customer.getMobile().length() == 10 && customer.getEmail().contains("@gmail.com")
-				&& customer.getLogin().getUsername() != null && customer.getLogin().getPassword() != null) {
-
+		
 			customerRepository.save(customer);
 
 			customer.getLogin().setType(UserType.CUSTOMER);
@@ -50,29 +48,29 @@ public class CustomerServiceImpl implements CustomerService {
 
 			return output;
 
-		} else {
-			throw new CustomerException("Fill All The Details");
-		}
 	}
 
 	@Override
 	public Customer customerLogin(Login login) throws LoginException {
-//		Login login2 = loginRepository.findByUsername(login.getUsername());
-//		
-//		if(login2 == null ) {
-//			throw new LoginException("No A./c Found");
-//		}
-//		else if(!login2.getPassword().equals(login.getPassword())) {
-//			throw new LoginException("Pass Incorr");
-//		}
-//		
-//		Customer customer = customerRepository.findByLogin(login2);
-//		
-//		if(customer == null) {
-//			throw new CustomerException("Customer Not Found");
-//		}
-
-		return null;
+		Login login2 = loginRepository.findByUsername(login.getUsername());
+		
+		if(login2 == null ) {
+			throw new LoginException("No A./c Found");
+		}
+		else if(!login2.getPassword().equals(login.getPassword())) {
+			throw new LoginException("Password Incorrect");
+		}
+		else {
+			Customer customer = customerRepository.findByLogin(login2);
+			
+			if(customer == null) {
+				throw new CustomerException("Customer Not Found");
+			}
+			else {
+				return customer;
+			}
+		}
+//		return null;
 	}
 
 	@Override
@@ -104,22 +102,21 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Issue> getAllIssuesByCustomerId(Integer customerId) throws IssueException {
-		if (customerId != null) {
-			List<Issue> issues = new ArrayList<>();
-			issues = customerRepository.getIssuesByCustomerId(customerId);
 
-			if (issues != null) {
-				if (issues.size() > 0) {
-					return issues;
-				} else {
-					throw new IssueException("No Issues Found");
-				}
-			} else {
-				throw new CustomerException("Invalid Customer ID");
-			}
-		} else {
-			throw new CustomerException("Enter Customer ID");
+		Optional<Customer> optional = customerRepository.findById(customerId);
+		
+		if(optional.isEmpty()) {
+			throw new CustomerException("Customer Not Found");
 		}
+		
+		List<Issue> issues = optional.get().getIssues();
+		
+		if(issues.size() == 0) {
+			throw new IssueException("No Issues Found");
+		}
+		
+		return issues;
+		
 	}
 
 	@Override
@@ -155,32 +152,53 @@ public class CustomerServiceImpl implements CustomerService {
 	public Output reopenIssueById(Integer issueId) throws IssueException {
 		Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueException("Invalid Issue ID"));
 
-		if(!issue.isIssueStatus()) {
+		if (!issue.isIssueStatus()) {
 			issue.setIssueStatus(true);
-			
+
 			issueRepository.save(issue);
 
 			Output output = new Output();
 			output.setMessage("Issue Updated Successfully");
 
 			return output;
-		}
-		else {
+		} else {
 			throw new IssueException("Issue Already Opened");
 		}
-		
+
 	}
 
 	@Override
-	public Output updatePassword(Integer customerId, String oldPassword, String newPassword) throws CustomerException {
-		if(customerId != null && oldPassword != null) {
-//			if()
-			return null;
-		}
-		else {
+	public Output updatePassword(CustomerUpdatePasswordDto dto, Integer customerId) throws CustomerException {
+
+		if (customerId != null) {
+			Optional<Customer> optional = customerRepository.findById(customerId);
+
+			if (optional.isPresent()) {
+				Customer customer = optional.get();
+
+				if (dto != null && dto.getNewPassword() != null && dto.getOldPassword() != null) {
+					if (customer.getLogin().getPassword().equals(dto.getOldPassword())) {
+						customer.getLogin().setPassword(dto.getNewPassword());
+
+						customerRepository.save(customer);
+
+						Output output = new Output();
+						output.setMessage("Password Changed Successfully");
+
+						return output;
+					} else {
+						throw new CustomerException("Wrong Password Entered");
+					}
+				} else {
+					throw new CustomerException("Fill All The Fields");
+				}
+			} else {
+				throw new CustomerException("No Customer Found");
+			}
+		} else {
 			throw new CustomerException("Enter Customer ID");
 		}
-		
+
 	}
 
 }

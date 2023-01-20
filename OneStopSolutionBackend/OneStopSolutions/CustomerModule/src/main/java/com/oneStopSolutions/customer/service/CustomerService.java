@@ -6,6 +6,7 @@ import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.dtoes.CustomerUpdatePasswordDto;
 import com.oneStopSolutions.customer.exception.CustomerException;
 import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.exception.LoginException;
@@ -26,6 +27,6 @@ public interface CustomerService {
 
 	public Output reopenIssueById(Integer issueId) throws IssueException;
 
-	public Output updatePassword(Integer customerId, String oldPassword, String newPassword) throws CustomerException;
+	public Output updatePassword(CustomerUpdatePasswordDto dto, Integer customerId) throws CustomerException;
 
 }

@@ -36,8 +36,7 @@ public class Customer {
 	private String mobile;
 	private String city;
 	
-	@OneToOne
-	@Transient
+	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
 	@OneToMany
