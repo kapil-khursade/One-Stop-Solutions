@@ -73,4 +73,34 @@ public class CustomerServiceImpl implements CustomerService {
 		return customer;
 	}
 
+	@Override
+	public Output createIssue(Issue issue) throws IssueException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Issue getIssueId(Integer Id) throws IssueException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Output deleteIssueId(Integer Id) throws IssueException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Output reopenIssueById(Integer Id) throws IssueException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Output updatePassword(Integer id, String oldPassword, String newPassword) throws CustomerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
