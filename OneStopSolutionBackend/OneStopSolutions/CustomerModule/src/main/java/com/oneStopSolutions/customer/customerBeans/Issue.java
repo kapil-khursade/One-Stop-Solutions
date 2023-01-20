@@ -1,5 +1,6 @@
 package com.oneStopSolutions.customer.customerBeans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,8 @@ public class Issue {
 	public Integer issueId;
 	public String issueType;
 	public String issueDescription;
+	
+	@Column(columnDefinition = "BOOLEAN")
 	public boolean issueStatus;
 
 }

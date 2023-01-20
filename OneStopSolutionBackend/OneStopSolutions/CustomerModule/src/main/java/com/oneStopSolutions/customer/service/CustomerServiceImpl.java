@@ -34,39 +34,36 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Output registerCustomer(Customer customer) throws CustomerException {
-		
-			customerRepository.save(customer);
 
-			customer.getLogin().setType(UserType.CUSTOMER);
+		customerRepository.save(customer);
 
-			customer.getLogin().setActive(true);
+		customer.getLogin().setType(UserType.CUSTOMER);
 
-			loginRepository.save(customer.getLogin());
+		customer.getLogin().setActive(true);
 
-			Output output = new Output();
-			output.setMessage("Customer Registered");
+		loginRepository.save(customer.getLogin());
 
-			return output;
+		Output output = new Output();
+		output.setMessage("Customer Registered");
+
+		return output;
 
 	}
 
 	@Override
 	public Customer customerLogin(Login login) throws LoginException {
 		Login login2 = loginRepository.findByUsername(login.getUsername());
-		
-		if(login2 == null ) {
+
+		if (login2 == null) {
 			throw new LoginException("No A./c Found");
-		}
-		else if(!login2.getPassword().equals(login.getPassword())) {
+		} else if (!login2.getPassword().equals(login.getPassword())) {
 			throw new LoginException("Password Incorrect");
-		}
-		else {
+		} else {
 			Customer customer = customerRepository.findByLogin(login2);
-			
-			if(customer == null) {
+
+			if (customer == null) {
 				throw new CustomerException("Customer Not Found");
-			}
-			else {
+			} else {
 				return customer;
 			}
 		}
@@ -75,48 +72,42 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Output createIssue(Issue issue, Integer customerId) throws IssueException {
-		if (customerId != null) {
-			Optional<Customer> optional = customerRepository.findById(customerId);
 
-			if (optional.isPresent()) {
-				Customer customer = optional.get();
+		Optional<Customer> optional = customerRepository.findById(customerId);
 
-				if (issue.getIssueDescription() != null && issue.getIssueType() != null) {
-					customer.getIssues().add(issue);
-
-					Output output = new Output();
-					output.setMessage("Issue Added Successfully");
-
-					return output;
-				} else {
-					throw new IssueException("Enter Issue Type or Issue Description");
-				}
-
-			} else {
-				throw new CustomerException("No Customer Found");
-			}
-		} else {
-			throw new CustomerException("Invalid Customer ID");
+		Customer customer = optional.get();
+		
+		if(customer == null) {
+			throw new CustomerException("No Customer Found");
 		}
+
+		customer.getIssues().add(issue);
+		
+		customerRepository.save(customer);
+
+		Output output = new Output();
+		output.setMessage("Issue Added Successfully");
+
+		return output;
 	}
 
 	@Override
 	public List<Issue> getAllIssuesByCustomerId(Integer customerId) throws IssueException {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
-		
-		if(optional.isEmpty()) {
+
+		if (optional.isEmpty()) {
 			throw new CustomerException("Customer Not Found");
 		}
-		
+
 		List<Issue> issues = optional.get().getIssues();
-		
-		if(issues.size() == 0) {
+
+		if (issues.size() == 0) {
 			throw new IssueException("No Issues Found");
 		}
-		
+
 		return issues;
-		
+
 	}
 
 	@Override
