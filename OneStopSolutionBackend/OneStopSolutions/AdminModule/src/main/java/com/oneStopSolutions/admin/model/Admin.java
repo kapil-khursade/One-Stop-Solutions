@@ -22,6 +22,6 @@ public class Admin {
     private Department department;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @Transient
+//    @Transient
     private Login login;
 }
