@@ -114,7 +114,7 @@ public class OperatorServiceImpl implements OperatorService {
 	}
 
 	@Override
-	public Customer getCustomrById(Integer customerId) throws OperatorException {
+	public Customer getCustomerById(Integer customerId) throws OperatorException {
 
 		Optional<Customer> opt = customerDao.findById(customerId);
 

@@ -37,7 +37,7 @@ public class OperatorController {
 		return new ResponseEntity<Operator>(operator, HttpStatus.CREATED);
 	}
 	//To get Issues By Customer Id
-	@GetMapping("issues/{customerId}")
+	@GetMapping("issues/id/{customerId}")
 	public ResponseEntity<List<Issue>> getIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId){
 		List<Issue> issues=operatorService.getIssueByCustomerId(customerId);
 		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
@@ -65,21 +65,21 @@ public class OperatorController {
 	}
 	
 	//To get customer by ID
-	@GetMapping("/customer/{customerId}")
+	@GetMapping("/customer/id/{customerId}")
 	public ResponseEntity<Customer> getCustomrByIdHandler(@PathVariable("customerId") Integer customerId){
-		Customer customer = operatorService.getCustomrById(customerId);
+		Customer customer = operatorService.getCustomerById(customerId);
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 	
 	//To get Customer By FirstName
-	@GetMapping("/customer/{firstName}")
+	@GetMapping("/customer/fn/{firstName}")
 	public ResponseEntity<List<Customer>> getCustomerByFirstNameHandler(@PathVariable("firstName") String firstName){
 		List<Customer> customers=operatorService.getCustomerByFirstName(firstName);
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
 	}
 	
 	//To get Customer By Email
-	@GetMapping("customer/{email}")
+	@GetMapping("customer/e/{email}")
 	public ResponseEntity<Customer> getCustomerByEmailHandler(@PathVariable("email") String email){
 		Customer customer=operatorService.getCustomerByEmail(email);
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);

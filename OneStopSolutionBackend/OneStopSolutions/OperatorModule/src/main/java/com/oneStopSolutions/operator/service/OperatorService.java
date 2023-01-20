@@ -18,7 +18,7 @@ public interface OperatorService {
 	public List<Issue> getIssueByType(String issueType) throws OperatorException;
 	public Output modifyIssueById(Integer issueId,Issue issue)throws OperatorException;
 	public Output closeIssueById(Integer issueId)throws OperatorException;
-	public Customer getCustomrById(Integer customerId)throws OperatorException;
+	public Customer getCustomerById(Integer customerId)throws OperatorException;
 	public List<Customer> getCustomerByFirstName(String firstName)throws OperatorException;
 	public Customer getCustomerByEmail(String email)throws OperatorException;
 	public Output lockCustomerById(Integer customerId)throws OperatorException;
