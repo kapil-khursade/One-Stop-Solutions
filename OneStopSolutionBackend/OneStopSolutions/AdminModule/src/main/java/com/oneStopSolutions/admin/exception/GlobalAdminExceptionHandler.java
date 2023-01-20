@@ -43,22 +43,7 @@ public class GlobalAdminExceptionHandler {
 
 	}
 
-	//Handler for Employee Exception
 
-<<<<<<< HEAD
-//	@ExceptionHandler(EmployeeException.class)
-//	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler3(DepartmentException ae, WebRequest req) {
-//
-//		MyErrorAdminBean err = new MyErrorAdminBean();
-//
-//		err.setTimestamp(LocalDateTime.now());
-//		err.setMessage(ae.getMessage());
-//		err.setDetails(req.getDescription(false));
-//
-//		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
-//
-//	}
-=======
 	@ExceptionHandler(DepartmentException.class)
 	public ResponseEntity<MyErrorAdminBean> studentExceptionHandler3(DepartmentException ae, WebRequest req) {
 
@@ -71,7 +56,6 @@ public class GlobalAdminExceptionHandler {
 		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 
 	}
->>>>>>> branch 'main' of https://github.com/kapil-khursade/brisk-desire-6503.git
 
 	// Handler for any other Exception
 
