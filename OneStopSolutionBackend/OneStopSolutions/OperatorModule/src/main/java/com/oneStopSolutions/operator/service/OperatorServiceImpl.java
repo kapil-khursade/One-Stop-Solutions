@@ -123,6 +123,7 @@ public class OperatorServiceImpl implements OperatorService {
 	@Override
 	public List<Customer> getCustomerByFirstName(String firstName) throws OperatorException {
 		
+		
 		List<Customer> customers = customerDao.findByFirstName(firstName);
 		if(!customers.isEmpty())
 			return customers;
