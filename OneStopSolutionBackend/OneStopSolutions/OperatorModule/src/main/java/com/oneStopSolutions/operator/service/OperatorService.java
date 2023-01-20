@@ -14,16 +14,16 @@ import com.oneStopSolutions.operator.exception.SolutionException;
 public interface OperatorService {
 
 	public Operator loginOperator(Login login) throws OperatorException;
-	public List<Issue> getIssueByCustomerId(Integer Id) throws OperatorException;
-	public List<Issue> getIssueByType(String type) throws OperatorException;
-	public Output modifyIssueById(Integer Id)throws OperatorException;
-	public Output closeIssueById(Integer Id)throws OperatorException;
-	public Customer getCustomrById(Integer Id)throws OperatorException;
-	public List<Customer> getCustomerByName(String name)throws OperatorException;
+	public List<Issue> getIssueByCustomerId(Integer customerId) throws OperatorException;
+	public List<Issue> getIssueByType(String issueType) throws OperatorException;
+	public Output modifyIssueById(Integer issueId,Issue issue)throws OperatorException;
+	public Output closeIssueById(Integer issueId)throws OperatorException;
+	public Customer getCustomrById(Integer customerId)throws OperatorException;
+	public List<Customer> getCustomerByFirstName(String firstName)throws OperatorException;
 	public Customer getCustomerByEmail(String email)throws OperatorException;
-	public Output lockCustomerById(Integer Id)throws OperatorException;
-	public Output createSolutionToIssue(Integer IssueId, Solution solution)throws SolutionException;
-	public List<Solution> getAllSolutionToIssue(Integer IssueId)throws SolutionException;
-	public Output deleteSolutionBy(Integer Id)throws SolutionException;
+	public Output lockCustomerById(Integer customerId)throws OperatorException;
+	public Output createSolutionToIssue(Integer issueId, Solution solution)throws SolutionException;
+	public List<Solution> getAllSolutionToIssue(Integer issueId)throws SolutionException;
+	public Output deleteSolutionById(Integer solutionId)throws SolutionException;
 
 }

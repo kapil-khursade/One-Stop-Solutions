@@ -35,7 +35,7 @@ public class Operator {
 	private String operatorMobile;
 	private String operatorType;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operator")
