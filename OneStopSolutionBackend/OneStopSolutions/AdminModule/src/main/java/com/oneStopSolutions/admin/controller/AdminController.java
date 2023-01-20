@@ -5,6 +5,7 @@ import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
 import com.oneStopSolutions.admin.model.Department;
 import com.oneStopSolutions.admin.service.AdminServices;
+import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class AdminController {
 
     //Register Admin
     
-    @PostMapping("/pot")
+    @PostMapping("/register")
     public ResponseEntity<Output> registerAdminHandler(@RequestBody Admin admin) throws AdminException{
 
         Output output = adminService.registerAdmin(admin);
@@ -34,8 +35,14 @@ public class AdminController {
 
     //Admin login
 
+    @PostMapping("/login")
+    public ResponseEntity<Admin> loginAdminHandler(@RequestBody Login login) throws AdminException {
+        Admin admin= adminService.adminLogin(login);
+        return new ResponseEntity<>(admin, HttpStatus.CREATED);
+    }
+
     //Create new  Department
-    @PostMapping("/d")
+    @PostMapping("/department")
     public ResponseEntity<Output> createDepartmentHandler(@RequestBody Department department) throws DepartmentException {
 
         Output output = adminService.createDepartment(department);
@@ -86,7 +93,7 @@ public class AdminController {
 
     // Add new Operator
 
-    @PostMapping("/operators")
+    @PostMapping("/operator")
     public ResponseEntity<Output> addOperatorHandler(@RequestBody Operator operator)throws AdminException{
 
         Output output = adminService.addOperator(operator);
@@ -115,7 +122,7 @@ public class AdminController {
 
     // Get Operator By Id
 
-    @GetMapping("/operator/{id}")
+    @GetMapping("/operators/{id}")
     public ResponseEntity<Operator> getOperatorByIdHandler(@PathVariable("id") Integer id)throws AdminException{
 
         Operator operator = adminService.getOperatorById(id);

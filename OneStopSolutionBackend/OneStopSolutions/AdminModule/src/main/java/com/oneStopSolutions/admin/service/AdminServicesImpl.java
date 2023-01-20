@@ -6,7 +6,6 @@ import com.oneStopSolutions.admin.model.Admin;
 import com.oneStopSolutions.admin.model.Department;
 import com.oneStopSolutions.admin.repository.AdminDao;
 import com.oneStopSolutions.admin.repository.DepartmentDao;
-import com.oneStopSolutions.admin.repository.EmployeeDao;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.customerBeans.UserType;
@@ -29,9 +28,6 @@ public class AdminServicesImpl implements AdminServices{
 
     @Autowired
     private DepartmentDao departmentDao;
-
-    @Autowired
-    private EmployeeDao employeeDao;
 
     @Autowired
     @Transient
@@ -71,7 +67,23 @@ public class AdminServicesImpl implements AdminServices{
 
     @Override
     public Admin adminLogin(Login login) throws AdminException {
-        return new Admin();
+        Login login2 = loginDao.findByUsername(login.getUsername());
+
+        if (login2 == null) {
+            throw new AdminException("No A./c Found");
+        } else if (!login2.getPassword().equals(login.getPassword())) {
+            throw new AdminException("Password Incorrect");
+        } else {
+
+           Admin admin = adminDao.findByLogin(login2);
+
+            if (admin == null) {
+                throw new AdminException("Admin Not Found");
+            } else {
+                return admin;
+            }
+
+        }
     }
 
 
@@ -209,7 +221,7 @@ public class AdminServicesImpl implements AdminServices{
         }
 
 
-        throw new AdminException("Operaor is null");
+        throw new AdminException("Operator is null");
 
     }
 
