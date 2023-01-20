@@ -1,0 +1,192 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+
+    <!-- adding font awsome icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://kit.fontawesome.com/32f181d7c4.js" crossorigin="anonymous"></script>
+
+    <script src="admin.js"></script>
+</head>
+<body>
+
+    <nav>
+        <div id="nav">
+            <div>
+                <img src="resources/OneStopSolution.png" alt="logo">
+            </div>
+            <div id="options">
+                <li onclick="logOutAdmin()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+            </div>
+        </div>
+    </nav>
+
+    <section id="admSec">
+
+        <div>
+            <span>Admin Profile</span>
+          <table>
+            <tbody id="profile">
+                <tr>
+                    <td>First Name:</td>
+                    <td>Kapil</td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td>Khursade</td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td>8605514442</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>kapilkhursade@gamil.com</td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td>Bhusawal</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="getAllDepart">
+            <span onclick="openTable('getAllDepart')">Get All Department</span>
+            <table class="hide">
+                <thead>
+                    <td>Id</td>
+                    <td>Name</td>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="createDepart">
+            <span onclick="openAdmiForm('createDepart')">Create Department</span>
+            <form class="admiFormCss hide">
+                <label>Department Name</label>
+                <input type="text" name="departmentName">
+                <input type="submit" value="Create">
+            </form>
+        </div>
+
+        <div id="deleteDepart">
+            <span onclick="openAdmiForm('deleteDepart')">Delete Department</span>
+            <form class="admiFormCss hide">
+                <label>Department Id</label>
+                <input type="number" name="departmentId">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+
+        <div id="updateDepart">
+            <span onclick="openAdmiForm('updateDepart')">Update Department</span>
+            <form class="admiFormCss hide">
+                <label>Department Id</label>
+                <input type="number" name="departmentId">
+                <label>Department Name</label>
+                <input type="text" name="departmentName">
+                <input type="submit" value="Update">
+            </form>
+        </div>
+
+        <div id="getDepartById">
+            <span onclick="openAdmiForm('getDepartById')">Get Department By Id</span>
+            <form class="admiFormCss hide">
+                <label>Department Id</label>
+                <input type="number" name="departmentId">
+                <input type="submit" value="Get" onclick="openTable('getDepartById')">
+            </form>
+            <table class="hide">
+                <thead>
+                    <td>Id</td>
+                    <td>Name</td>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="createOperator">
+            <span onclick="openAdmiForm('createOperator')">Create Operator</span>
+            <form class="admiFormCss hide">
+                <label>FirstName</label>
+                <input type="text" name="firstname">
+                <label>LastName</label>
+                <input type="text" name="lastname">
+                <label>Email</label>
+                <input type="email" name="email">
+                <label>Mobile</label>
+                <input type="text" name="mobile">
+                <label>City</label>
+                <input type="text" name="city">
+                <label>Username</label>
+                <input type="text" name="username">
+                <label>Password</label>
+                <input type="password" name="password">
+                <label>Operator Type</label>
+                <select name="type">
+                    <option value="">Select Type</option>
+                    <option value="">Television</option>
+                    <option value="">Mobile</option>
+                    <option value="">Laptop</option>
+                    <option value="">Watch</option>
+                    <option value="">Airpods</option>
+                    <option value="">I Pad</option>
+                </select>
+                <input type="submit" value="Register Operator">
+            </form>
+        </div>
+
+        <div id="getOperById">
+            <span onclick="openAdmiForm('getOperById')">Get Operator By Id</span>
+            <form class="admiFormCss hide">
+                <label>Department Id</label>
+                <input type="number" name="departmentId">
+                <input type="submit" value="Get" onclick="openTable('getOperById')">
+            </form>
+            <table class="hide">
+                <thead>
+                    <td>Id</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Phone</td>
+                    <td>Type</td>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="getAllOperById">
+            <span onclick="openTable('getAllOperById')">Get All Operator</span>
+            <table class="hide">
+                <thead>
+                    <td>Id</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Phone</td>
+                    <td>Type</td>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+    
+</body>
+</html>
