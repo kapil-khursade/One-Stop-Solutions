@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -35,11 +36,10 @@ public class Customer {
 	private String mobile;
 	private String city;
 	
-	@OneToOne
-	@Transient
+	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	private List<Issue> issues = new ArrayList<>();
 	
 }

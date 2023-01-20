@@ -1,4 +1,5 @@
 package com.oneStopSolutions.admin.model;
+import com.oneStopSolutions.customer.customerBeans.Login;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,10 @@ public class Admin {
     private String lastName;
     private String email;
 
-    //bidirectional
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Department department;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Transient
+    private Login login;
 }

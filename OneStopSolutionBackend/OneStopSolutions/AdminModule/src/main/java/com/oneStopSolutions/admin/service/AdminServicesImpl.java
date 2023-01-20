@@ -9,11 +9,14 @@ import com.oneStopSolutions.admin.repository.DepartmentDao;
 import com.oneStopSolutions.admin.repository.EmployeeDao;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.customerBeans.UserType;
+import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.repository.OperatorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +34,12 @@ public class AdminServicesImpl implements AdminServices{
     private EmployeeDao employeeDao;
 
     @Autowired
+    @Transient
     private OperatorDao operatorDao;
+
+    @Autowired
+    @Transient
+    private LoginRepository loginDao;
 
     //register admin
     @Override
@@ -40,6 +48,11 @@ public class AdminServicesImpl implements AdminServices{
         if(admin != null) {
 
             adminDao.save(admin);
+            admin.getLogin().setType(UserType.ADMIN);
+            admin.getLogin().setActive(true);
+            loginDao.save(admin.getLogin());
+
+
 
             Output output = new Output();
             output.setTimestamp(LocalDateTime.now());
@@ -50,6 +63,7 @@ public class AdminServicesImpl implements AdminServices{
         }else{
             throw new AdminException("admin is null");
         }
+
     }
 
 
@@ -57,15 +71,7 @@ public class AdminServicesImpl implements AdminServices{
 
     @Override
     public Admin adminLogin(Login login) throws AdminException {
-
-/*        String userId = login.getUsername();
-        String password = login.getPassword();
-
-        employeeDao.
-        */
-
-//        Admin admin = adminDao.findB
-        return null;
+        return new Admin();
     }
 
 

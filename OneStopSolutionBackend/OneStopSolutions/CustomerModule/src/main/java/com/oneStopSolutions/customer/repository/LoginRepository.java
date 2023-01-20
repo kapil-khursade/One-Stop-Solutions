@@ -8,6 +8,7 @@ import com.oneStopSolutions.customer.customerBeans.Login;
 @Repository
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 	
-	
+	public Login findByUsername(String username);
+
 
 }

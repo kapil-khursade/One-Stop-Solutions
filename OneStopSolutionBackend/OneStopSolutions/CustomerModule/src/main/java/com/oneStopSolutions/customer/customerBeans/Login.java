@@ -21,7 +21,11 @@ public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer LoginId;
+	
+	@Column(unique = true)
 	private String username;
+	
+	@Column(unique = true)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
