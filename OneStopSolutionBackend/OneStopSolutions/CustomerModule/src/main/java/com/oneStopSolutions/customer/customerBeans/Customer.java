@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +34,10 @@ public class Customer {
 	private String email;
 	private String mobile;
 	private String city;
+	
+	@OneToOne
+	@Transient
+	private Login login;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Issue> issues = new ArrayList<>();

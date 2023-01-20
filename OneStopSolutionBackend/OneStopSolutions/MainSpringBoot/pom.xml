@@ -1,32 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.oneStopSolutions</groupId>
-    <artifactId>OneStopSolutions</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>MainSpringBoot</artifactId>
-  <description>This will contain the main spting boot fill</description>
-  
-   <dependencies>
-      
-      <dependency>
-         <groupId>com.oneStopSolutions</groupId>
-         <artifactId>CustomerModule</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      
-       <dependency>
-         <groupId>com.oneStopSolutions</groupId>
-         <artifactId>OperatorModule</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      
-       <dependency>
-         <groupId>com.oneStopSolutions</groupId>
-         <artifactId>AdminModule</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      
-  </dependencies>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.oneStopSolutions</groupId>
+		<artifactId>OneStopSolutions</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>MainSpringBoot</artifactId>
+	<description>This will contain the main spting boot fill</description>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oneStopSolutions</groupId>
+			<artifactId>CustomerModule</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oneStopSolutions</groupId>
+			<artifactId>OperatorModule</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oneStopSolutions</groupId>
+			<artifactId>AdminModule</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

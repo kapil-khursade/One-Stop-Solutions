@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Output {
 
 	private String message;
-	private LocalDateTime timestamp;
-	
+	private LocalDateTime timestamp = LocalDateTime.now();
+
 }
