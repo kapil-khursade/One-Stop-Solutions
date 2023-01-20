@@ -29,8 +29,5 @@ public class Login {
 	@Column(columnDefinition = "BOOLEAN")
 	private boolean isActive;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CUST_LOGIN")
-	private Customer customer;
 	
 }

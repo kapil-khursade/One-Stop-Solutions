@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class CustomerController {
+public class AdminController {
 
     @Autowired
     private AdminServices adminService;
@@ -34,7 +34,7 @@ public class CustomerController {
     //Admin login
 
     //Create new  Department
-    @PostMapping("/")
+    @PostMapping("/a")
     public ResponseEntity<Output> createDepartmentHandler(@RequestBody Department department) throws DepartmentException {
 
         Output output = adminService.createDepartment(department);

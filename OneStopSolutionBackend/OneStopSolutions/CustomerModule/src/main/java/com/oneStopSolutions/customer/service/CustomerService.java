@@ -14,6 +14,8 @@ public interface CustomerService {
 
 	public Output registerCustomer(Customer customer) throws CustomerException;
 
+	public Customer customerLogin(Login login) throws LoginException;
+
 //	public Customer customerLogin(Login login) throws LoginException
 
 	public List<Issue> getAllIssuesByCustomerId(Integer Id) throws IssueException;

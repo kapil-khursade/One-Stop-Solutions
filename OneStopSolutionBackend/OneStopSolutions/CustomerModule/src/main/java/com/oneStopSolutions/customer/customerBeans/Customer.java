@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +35,8 @@ public class Customer {
 	private String mobile;
 	private String city;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+	@OneToOne
+	@Transient
 	private Login login;
 	
 	@ManyToMany(cascade = CascadeType.ALL)

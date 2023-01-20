@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
+import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.exception.CustomerException;
 import com.oneStopSolutions.customer.exception.IssueException;
@@ -36,36 +37,40 @@ public class CustomerServiceImpl implements CustomerService {
 	private String mobile;
 	private String city;*/
 		
-		if(customer.getEmail().contains("@gmail.com")) {
-			if(customer.getMobile().length() == 10) {
-				int passwordLength = customer.getLogin().getPassword().length();
-				if(passwordLength > 5 && passwordLength < 9) {
-					customer.getLogin().setActive(true);
-					customer.getLogin().setType("CUSTOMER");
-					
-					customerRepository.save(customer);
-					
-					Output output = new Output();
-					output.setMessage("Customer Registered");
-					return output;
-				}
-				else {
-					throw new LoginException("Password Should Be 6 To 8 Characters Long");
-				}
-			}
-			else {
-				throw new CustomerException("Invalid Mobile Number");
-			}
-		}
-		else {
-			throw new CustomerException("Invalid Email Address");
-		}
+		customerRepository.save(customer);
+		
+		loginRepository.save(customer.getLogin());
+		
+		Output output = new Output();
+		output.setMessage("Customer Registered");
+		
+		return output;
 	}
 
 	@Override
 	public List<Issue> getAllIssuesByCustomerId(Integer Id) throws IssueException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Customer customerLogin(Login login) throws LoginException {
+		Login login2 = loginRepository.findByUsername(login.getUsername());
+		
+		if(login2 == null ) {
+			throw new LoginException("No A./c Found");
+		}
+		else if(!login2.getPassword().equals(login.getPassword())) {
+			throw new LoginException("Pass Incorr");
+		}
+		
+		Customer customer = customerRepository.findByLogin(login2);
+		
+		if(customer == null) {
+			throw new CustomerException("Customer Not Found");
+		}
+		
+		return customer;
 	}
 
 }
