@@ -73,8 +73,14 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public List<Issue> getIssueByType(String issueType) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
+	
+		List<Issue> issues=issueDao.findByIssueType(issueType);
+		
+		if(!issues.isEmpty())
+			return issues;
+		else
+			throw new OperatorException("No issue found with "+issueType);
+		
 	}
 
 	@Override
@@ -133,15 +139,19 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public Customer getCustomerByEmail(String email) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Customer customer=customerDao.findByEmail(email);
+		if(customer==null) {
+			throw new OperatorException("No customer found with email "+email);
+		}
+		
+		return customer;
 	}
 
 	@Override
 	public Output lockCustomerById(Integer customerId) throws OperatorException {
 
 		Optional<Customer> opt = customerDao.findById(customerId);
-		Output output = new Output();
 
 		if (opt.isEmpty()) {
 			throw new OperatorException("No customer found.");
@@ -163,7 +173,7 @@ public class OperatorServiceImpl implements OperatorService {
 			solutionDao.save(solution);
 			return new Output("Solution is created for Issue id " + issueId, LocalDateTime.now());
 		} else {
-			throw new SolutionException("Issue doen't exist with id " + issueId);
+			throw new SolutionException("Issue doesn't exist with id " + issueId);
 		} 
 	}
 
@@ -172,13 +182,17 @@ public class OperatorServiceImpl implements OperatorService {
 		
 		Optional<Issue> opt = issueDao.findById(issueId);
 		
-		if(opt.isPresent()) {
-			Issue issue=opt.get();
-			List<Solution> solutions = solutionDao.findAll();
-			return solutions;
-		}else {
+		if(opt.isEmpty()) {
 			throw new SolutionException("Issue doen't exist with id " + issueId);
 		} 
+		Issue issue=opt.get();
+		List<Solution> solutions = solutionDao.findAll();
+		if(solutions.size()==0) {
+			throw new OperatorException("No solution found for "+issueId);
+		}
+		
+		return solutions;
+	
 	}
 
 	@Override

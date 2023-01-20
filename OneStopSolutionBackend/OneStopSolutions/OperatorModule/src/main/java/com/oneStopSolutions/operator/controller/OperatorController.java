@@ -30,7 +30,6 @@ public class OperatorController {
 	@Autowired
 	private OperatorService operatorService;
 	
-	
 	//Operator login
 	@PostMapping("/operatorLogin")
 	public ResponseEntity<Operator> loginOperatorHandler(@RequestBody Login login){
@@ -41,6 +40,13 @@ public class OperatorController {
 	@GetMapping("issues/{customerId}")
 	public ResponseEntity<List<Issue>> getIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId){
 		List<Issue> issues=operatorService.getIssueByCustomerId(customerId);
+		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
+	}
+	
+	//To get Issue By Type
+	@GetMapping("/issues/{type}")
+	public ResponseEntity<List<Issue>> getIssueByTypeHandler(@PathVariable("type") String issueType){
+		List<Issue> issues=operatorService.getIssueByType(issueType);
 		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
 	}
 	
@@ -65,11 +71,25 @@ public class OperatorController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 	
-	//To getCustomerByFirstName
+	//To get Customer By FirstName
 	@GetMapping("/customer/{firstName}")
 	public ResponseEntity<List<Customer>> getCustomerByFirstNameHandler(@PathVariable("firstName") String firstName){
 		List<Customer> customers=operatorService.getCustomerByFirstName(firstName);
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
+	}
+	
+	//To get Customer By Email
+	@GetMapping("customer/{email}")
+	public ResponseEntity<Customer> getCustomerByEmailHandler(@PathVariable("email") String email){
+		Customer customer=operatorService.getCustomerByEmail(email);
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+	}
+	
+	//To lockCustomerById(Integer customerId)
+	@PatchMapping("/customer/{customerId}")
+	public ResponseEntity<Output> lockCustomerByIdHandler(@PathVariable("customerId") Integer customerId){
+		Output output=operatorService.lockCustomerById(customerId);
+		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
 	}
 	
 	//To create Solution To Issue by Id
@@ -85,6 +105,7 @@ public class OperatorController {
 		List<Solution> solutions=operatorService.getAllSolutionToIssue(issueId);
 		return new ResponseEntity<List<Solution>>(solutions, HttpStatus.OK);
 	}
+	
 	//To delete Solution By Id
 	@DeleteMapping("solution/{solutionId}")
 	public ResponseEntity<Output> deleteSolutionByIdHandler(@PathVariable("solutionId") Integer solutionId){
