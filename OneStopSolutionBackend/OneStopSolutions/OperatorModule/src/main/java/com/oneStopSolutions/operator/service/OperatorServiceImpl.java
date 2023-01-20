@@ -1,5 +1,7 @@
 package com.oneStopSolutions.operator.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,75 +28,108 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Autowired
 	private OperatorDao operatorDao;
-	
+
 	@Autowired
 	private SolutionDao solutionDao;
-	
+
 	@Autowired
 	private CustomerRepository customerDao;
-	
+
 	@Autowired
 	private LoginRepository loginDao;
-	
+
 	@Autowired
 	private IssueRepository issueDao;
-	
-	
+
 	@Override
 	public Operator loginOperator(Login login) throws OperatorException {
-		
-		Operator LoggedOperator;
-		
-		
-		return null;
+
+		Login login2=loginDao.findByUsername(login.getUsername());
+		if(login2==null) {
+			throw new OperatorException("Account doesn't exist.");
+		}else if(!login2.getPassword().equals(login.getPassword())) {
+			throw new OperatorException("Wrong password.");
+		}
+
+		Operator operator=operatorDao.findByLogin(login);
+		if(operator==null) {
+			throw new OperatorException("Account doesn't exist.");
+		}
+		return operator;
 	}
 
-
 	@Override
-	public List<Issue> getIssueByCustomerId(Integer Id) throws OperatorException {
-	
+	public List<Issue> getIssueByCustomerId(Integer customerId) throws OperatorException {
 
-		
-		return null;
+		Optional<Customer> opt = customerDao.findById(customerId);
+
+		if (opt.isPresent()) {
+			Customer customer = opt.get();
+			return customer.getIssues();
+		} else {
+			throw new OperatorException("Customer doesn't exist with id " + customerId);
+		}
 	}
 
-
 	@Override
-	public List<Issue> getIssueByType(String type) throws OperatorException {
+	public List<Issue> getIssueByType(String issueType) throws OperatorException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public Output modifyIssueById(Integer Id) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
+	public Output modifyIssueById(Integer issueId, Issue issue) throws OperatorException {
+
+		Optional<Issue> opt = issueDao.findById(issueId);
+
+		if (opt.isPresent()) {
+//			Issue existingIssue=opt.get();
+			opt.get();
+//			existingIssue.setIssueDescription(issue.getIssueDescription());
+			issueDao.save(issue);
+			return new Output("Issue modified successfully.", LocalDateTime.now());
+		} else {
+			throw new OperatorException("Issue doen't exist with id " + issueId);
+		}
 	}
 
-
 	@Override
-	public Output closeIssueById(Integer Id) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
+	public Output closeIssueById(Integer issueId) throws OperatorException {
+
+		Optional<Issue> opt = issueDao.findById(issueId);
+
+		if (opt.isPresent()) {
+			Issue issue = opt.get();
+			issue.setIssueStatus(false);
+			return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
+		} else {
+			throw new OperatorException("Issue doen't exist with id " + issueId);
+		}
 	}
 
+	@Override
+	public Customer getCustomrById(Integer customerId) throws OperatorException {
+
+		Optional<Customer> opt = customerDao.findById(customerId);
+
+		if (opt.isPresent()) {
+			Customer customer = opt.get();
+			return customer;
+		} else
+			throw new OperatorException("Customer does not exist with Id " + customerId);
+
+	}
 
 	@Override
-	public Customer getCustomrById(Integer Id) throws OperatorException {
+	public List<Customer> getCustomerByFirstName(String firstName) throws OperatorException {
 		
-//		Customer customer=customerDao.getById(Id);
 		
-		return null;
+		List<Customer> customers = customerDao.findByFirstName(firstName);
+		if(!customers.isEmpty())
+			return customers;
+		else
+			throw new OperatorException("No customer found with "+firstName);
 	}
-
-
-	@Override
-	public List<Customer> getCustomerByName(String name) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public Customer getCustomerByEmail(String email) throws OperatorException {
@@ -102,32 +137,67 @@ public class OperatorServiceImpl implements OperatorService {
 		return null;
 	}
 
-
 	@Override
-	public Output lockCustomerById(Integer Id) throws OperatorException {
-		// TODO Auto-generated method stub
-		return null;
+	public Output lockCustomerById(Integer customerId) throws OperatorException {
+
+		Optional<Customer> opt = customerDao.findById(customerId);
+		Output output = new Output();
+
+		if (opt.isEmpty()) {
+			throw new OperatorException("No customer found.");
+		}
+		Customer customer=opt.get();
+		customer.getLogin().setActive(false);
+		customerDao.save(customer);
+
+		return new Output("Account locked", LocalDateTime.now());
 	}
 
-
 	@Override
-	public Output createSolutionToIssue(Integer IssueId, Solution solution) throws SolutionException {
-		// TODO Auto-generated method stub
-		return null;
+	public Output createSolutionToIssue(Integer issueId, Solution solution) throws SolutionException {
+		
+		Optional<Issue> opt = issueDao.findById(issueId);
+		
+		if(opt.isPresent()) {
+			Issue issue=opt.get();
+			solutionDao.save(solution);
+			return new Output("Solution is created for Issue id " + issueId, LocalDateTime.now());
+		} else {
+			throw new SolutionException("Issue doen't exist with id " + issueId);
+		} 
 	}
 
-
 	@Override
-	public List<Solution> getAllSolutionToIssue(Integer IssueId) throws SolutionException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Solution> getAllSolutionToIssue(Integer issueId) throws SolutionException {
+		
+		Optional<Issue> opt = issueDao.findById(issueId);
+		
+		if(opt.isPresent()) {
+			Issue issue=opt.get();
+			List<Solution> solutions = solutionDao.findAll();
+			return solutions;
+		}else {
+			throw new SolutionException("Issue doen't exist with id " + issueId);
+		} 
 	}
 
-
 	@Override
-	public Output deleteSolutionBy(Integer Id) throws SolutionException {
-		// TODO Auto-generated method stub
-		return null;
+	public Output deleteSolutionById(Integer solutionId) throws SolutionException {
+
+		Optional<Solution> opt = solutionDao.findById(solutionId);
+		Output output = new Output();
+
+		if (opt.isPresent()) {
+			Solution solution = opt.get();
+			solutionDao.delete(solution);
+
+			output.setMessage("Solution id " + solutionId + " deleted successfully.");
+			output.setTimestamp(LocalDateTime.now());
+
+			return output;
+		} else {
+			throw new SolutionException("Solution doesn't exist with id " + solutionId);
+		}
 	}
 
 }
