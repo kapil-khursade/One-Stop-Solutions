@@ -107,6 +107,7 @@ public class OperatorServiceImpl implements OperatorService {
 		if (opt.isPresent()) {
 			Issue issue = opt.get();
 			issue.setIssueStatus(false);
+			issueDao.save(issue);
 			return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
 		} else {
 			throw new OperatorException("Issue doen't exist with id " + issueId);
