@@ -221,7 +221,7 @@ public class AdminServicesImpl implements AdminServices{
         }
 
 
-        throw new AdminException("Operaor is null");
+        throw new AdminException("Operator is null");
 
     }
 
