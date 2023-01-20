@@ -77,7 +77,7 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
 	
-	@PutMapping("/customers/changepassword/")
+	@PutMapping("/customers/changepassword/{customerId}")
 	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId, @RequestBody CustomerUpdatePasswordDto dto) {
 		Output output = customerService.updatePassword(dto, customerId);
 		
