@@ -23,6 +23,7 @@ public class AdminController {
     private AdminServices adminService;
 
     //Register Admin
+<<<<<<< HEAD
     @PostMapping("/")
     public ResponseEntity<Output> registerAdminHandler(@RequestBody Admin admin) throws AdminException{
 
@@ -35,6 +36,20 @@ public class AdminController {
 
     //Create new  Department
     @PostMapping("/a")
+=======
+    @PostMapping("/pot")
+    public ResponseEntity<Output> registerAdminHandler(@RequestBody Admin admin) throws AdminException{
+
+        Output output = adminService.registerAdmin(admin);
+
+        return new ResponseEntity<>(output, HttpStatus.CREATED);
+    }
+
+    //Admin login
+
+    //Create new  Department
+    @PostMapping("/d")
+>>>>>>> branch 'main' of https://github.com/kapil-khursade/brisk-desire-6503.git
     public ResponseEntity<Output> createDepartmentHandler(@RequestBody Department department) throws DepartmentException {
 
         Output output = adminService.createDepartment(department);
