@@ -39,7 +39,8 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
-	@OneToMany
+	@OneToMany(targetEntity = Issue.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ci_fk", referencedColumnName = "customerId")
 	private List<Issue> issues = new ArrayList<>();
 	
 }
