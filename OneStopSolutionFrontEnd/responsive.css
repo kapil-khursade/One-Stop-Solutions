@@ -1,0 +1,78 @@
+@media only screen and (max-width: 750px){
+    #nav>span{
+        font-size: 8px;
+    }
+
+    main{
+        background-image: url("resources/customersupport.jpg");
+        background-repeat: 3;
+        background-size: 300% 100%;
+        background-position: center;
+    }
+
+    #cusSec, #opeSec, #admSec{
+        background-image: url("resources/customersupport.jpg");
+        background-repeat: 3;
+        background-size: 300% 100%;
+        background-position: center;
+    }
+
+    main>div>div{
+        width: 32%;
+        height: 150px;
+    }
+
+    main>div>div>i{
+        font-size: 45px;
+        margin-top: 15px;
+    }
+    main>div>div>h1{
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    .bgForm>div{
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #contact{
+        width: 50%;
+        left: 25%;
+    }
+
+    #contact>div{
+        font-size: 14px;
+    }
+
+    #contact>div:nth-child(2){
+        font-size: 24px;
+    }
+
+    .formCss{
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .formCss>span{
+        font-size: 24px;
+        right: 10%;
+    }
+
+    .formCss>input:last-child{
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    /* customer.html */
+    #options>li{
+        font-size: 14px;
+        justify-content: space-between;
+    }
+
+    /* table */
+    table{
+        width: 350px;
+        font-size: 12px;
+    }
+}
