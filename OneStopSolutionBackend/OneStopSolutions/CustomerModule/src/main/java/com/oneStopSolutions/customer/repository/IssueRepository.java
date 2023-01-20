@@ -10,6 +10,6 @@ import com.oneStopSolutions.customer.customerBeans.Issue;
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Integer> {
 	
-	public List<Issue> findByIssueByType(String issueType);
+	public List<Issue> findByIssueType(String issueType);
 
 }
