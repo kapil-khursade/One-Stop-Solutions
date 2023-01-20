@@ -15,6 +15,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
 	public Customer findByLogin(Login login);
 	
+	public List<Customer> findByFirstName(String name);
+	
+	public Customer findByCustomerByEmail(String email);
+	
 //	@Query("select c.issues from Customer c where c.customerId=?1")
 //	public List<Issue> getIssuesByCustomerId(Integer customerId);
 
