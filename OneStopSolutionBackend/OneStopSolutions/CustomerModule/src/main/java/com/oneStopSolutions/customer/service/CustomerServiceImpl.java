@@ -71,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 		Login login2 = loginRepository.findByUsername(login.getUsername());
 
 		if (login2 == null) {
-			throw new LoginException("No A./c Found");
+			throw new LoginException("Account Doesn't Exist");
 		} else if (!login2.getPassword().equals(login.getPassword())) {
 			throw new LoginException("Password Incorrect");
 		} 

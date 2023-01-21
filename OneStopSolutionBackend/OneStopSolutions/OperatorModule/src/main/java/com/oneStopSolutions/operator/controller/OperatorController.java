@@ -21,6 +21,7 @@ import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.service.OperatorService;
 
 @RestController
@@ -36,6 +37,7 @@ public class OperatorController {
 		Operator operator=operatorService.loginOperator(login);
 		return new ResponseEntity<Operator>(operator, HttpStatus.CREATED);
 	}
+	
 	//To get Issues By Customer Id
 	@GetMapping("issues/id/{customerId}")
 	public ResponseEntity<List<Issue>> getIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId){
@@ -52,8 +54,8 @@ public class OperatorController {
 	
 	//To modify Issue By Id
 	@PutMapping("/issue/{issueId}")
-	public ResponseEntity<Output> modifyIssueByIdHandler(@PathVariable("issueId") Integer issueId, @RequestBody Issue issue){
-		Output output = operatorService.modifyIssueById(issueId, issue);
+	public ResponseEntity<Output> modifyIssueByIdHandler(@PathVariable("issueId") Integer issueId, @RequestBody ModifyIssueDto dto){
+		Output output = operatorService.modifyIssueById(issueId, dto);
 		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
 	}
 	

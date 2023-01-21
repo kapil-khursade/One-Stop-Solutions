@@ -9,8 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
 
 import com.oneStopSolutions.customer.customerBeans.Login;
 
@@ -35,7 +40,7 @@ public class Operator {
 	private String operatorMobile;
 	private String operatorType;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operator")
