@@ -12,11 +12,13 @@ import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.repository.CustomerRepository;
 import com.oneStopSolutions.customer.repository.IssueRepository;
 import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.CreateSolutionDto;
 import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.exception.OperatorException;
 import com.oneStopSolutions.operator.exception.SolutionException;
@@ -121,9 +123,15 @@ public class OperatorServiceImpl implements OperatorService {
 
 		if (opt.isPresent()) {
 			Issue issue = opt.get();
-			issue.setIssueStatus(false);
-			issueDao.save(issue);
-			return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
+			if(issue.isIssueStatus()) {
+				issue.setIssueStatus(false);
+				issueDao.save(issue);
+				return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
+			}
+			else {
+				throw new IssueException("Issue Already Closed");
+			}
+			
 		} else {
 			throw new OperatorException("Issue doen't exist with id " + issueId);
 		}
@@ -180,36 +188,39 @@ public class OperatorServiceImpl implements OperatorService {
 	}
 
 	@Override
-	public Output createSolutionToIssue(Integer issueId, Solution solution) throws SolutionException {
+	public Output createSolutionToIssue(Integer issueId, Integer operatorId, CreateSolutionDto dto) throws SolutionException {
 		
 		Optional<Issue> opt = issueDao.findById(issueId);
-//		if(opt.isPresent()) {
-//			Issue issue=opt.get();
-//			Optional<Operator> opt1= operatorDao.findById(solution.getOperator().getOperatorId());
-//			Operator operator=opt1.get();
-//			operator.getSolutions().add(solution);
-//			solution.setIssue(issue);
-//			operatorDao.save(operator);
-//			System.out.println(operator);
-//			solutionDao.save(solution);
-//			return new Output("Solution is created for issue id "+issueId, LocalDateTime.now());
-//		}else {
-//			throw new SolutionException("Issue doesn't exist with id " + issueId);
-//		}
 		
-		if(opt.isPresent()) {
+		if(opt.isEmpty()) {
+			throw new IssueException("No Issue Found With issueId : " + issueId);
+		}
+		else {
 			Issue issue=opt.get();
-			Operator opt1=operatorDao.findById(solution.getOperator().getOperatorId()).get();
-			Set<Solution> solutions=opt1.getSolutions();
-			solutions.add(solution);
-			opt1.setSolutions(solutions);
-			operatorDao.save(opt1);
-			solution.setIssue(issue);
-			solutionDao.save(solution);
-			return new Output("Solution is created for Issue id " + issueId, LocalDateTime.now());
-		} else {
-			throw new SolutionException("Issue doesn't exist with id " + issueId);
-		} 
+			
+			Optional<Operator> opt1 = operatorDao.findById(operatorId);
+			
+			if(opt1.isEmpty()) {
+				throw new OperatorException("No Operator Found With Operator Id : " + operatorId);
+			}
+			else {
+				Operator operator = opt1.get();
+				
+				Solution solution = new Solution();
+				
+				solution.setIssue(issue);
+				solution.setSolutionDate(dto.getSolutionDate());
+				solution.setSolutionDescription(dto.getSolutionDescription());
+				solution.setOperator(operator);
+				
+				operator.getSolutions().add(solution);
+				
+				operatorDao.save(operator);
+				
+				return new Output("Solution is created for issue id "+issueId, LocalDateTime.now());
+			}
+		}
+		
 	}
 
 	@Override

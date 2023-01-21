@@ -8,6 +8,7 @@ import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.CreateSolutionDto;
 import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.exception.OperatorException;
 import com.oneStopSolutions.operator.exception.SolutionException;
@@ -23,7 +24,7 @@ public interface OperatorService {
 	public List<Customer> getCustomerByFirstName(String firstName)throws OperatorException;
 	public Customer getCustomerByEmail(String email)throws OperatorException;
 	public Output lockCustomerById(Integer customerId)throws OperatorException;
-	public Output createSolutionToIssue(Integer issueId, Solution solution)throws SolutionException;
+	public Output createSolutionToIssue(Integer issueId, Integer operatorId, CreateSolutionDto dto)throws SolutionException;
 	public List<Solution> getAllSolutionToIssue(Integer issueId)throws SolutionException;
 	public Output deleteSolutionById(Integer solutionId)throws SolutionException;
 
