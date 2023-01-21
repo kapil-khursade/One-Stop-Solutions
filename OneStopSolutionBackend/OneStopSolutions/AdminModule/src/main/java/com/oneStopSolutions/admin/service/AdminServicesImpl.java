@@ -1,6 +1,7 @@
 package com.oneStopSolutions.admin.service;
 
 import com.oneStopSolutions.admin.dto.AddOperatorDto;
+import com.oneStopSolutions.admin.dto.RegisterAdminDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -39,11 +40,70 @@ public class AdminServicesImpl implements AdminServices{
     @Transient
     private LoginRepository loginDao;
 
-    //register admin
+    //register admin [Subhadeep Bid]
     @Override
-    public Output registerAdmin(Admin admin) throws AdminException {
-
-        if(admin != null) {
+    public Output registerAdmin(RegisterAdminDto dto) throws AdminException, DepartmentException {
+    	if (dto != null) {
+        	
+        	Optional<Department> opt = departmentDao.findById(dto.getDepartmentId());
+        	
+        	if(opt != null) {
+        		Department department = opt.get();
+        		
+        		Admin admin = new Admin();
+        		
+        		admin.setFirstName(dto.getFirstName());
+        		admin.setLastName(dto.getLastName());
+        		admin.setEmail(dto.getEmail());
+        		admin.setDepartment(department);
+        		
+            	Login login = new Login();
+            	
+            	login.setUsername(dto.getUsername());
+            	login.setPassword(dto.getPassword());
+            	login.setActive(true);
+            	login.setType(UserType.ADMIN);
+            	
+            	admin.setLogin(login);
+            	
+        		department.getAdminList().add(admin);
+        		
+        		departmentDao.save(department);
+        		
+        		Output output = new Output();
+                output.setTimestamp(LocalDateTime.now());
+                output.setMessage("Admin Added Successfully");
+                return output;
+        	}
+        	else {
+        		throw new DepartmentException("No Department Found With DepartmentID : " +dto.getDepartmentId());
+        	}
+        	
+        } else {
+            throw new AdminException("Fill All the Fields");
+        }
+    	
+    	/*
+{
+  "adminId": 0,
+  "department": {
+    "departmentId": 0,
+    "departmentName": "string"
+  },
+  "email": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "login": {
+    "active": true,
+    "loginId": 0,
+    "password": "string",
+    "type": "ADMIN",
+    "username": "string"
+  }
+}
+*/
+        /*
+    	if(admin != null) {
 
             adminDao.save(admin);
             admin.getLogin().setType(UserType.ADMIN);
@@ -61,6 +121,7 @@ public class AdminServicesImpl implements AdminServices{
         }else{
             throw new AdminException("admin is null");
         }
+        */
 
     }
 
@@ -192,10 +253,10 @@ public class AdminServicesImpl implements AdminServices{
             	
             	login.setUsername(dto.getUsername());
             	login.setPassword(dto.getPassword());
+            	login.setActive(true);
+            	login.setType(UserType.OPERATOR);
             	
             	operator.setLogin(login);
-            	
-            	
             	
         		department.getOperatorList().add(operator);
         		
@@ -203,11 +264,11 @@ public class AdminServicesImpl implements AdminServices{
         		
         		Output output = new Output();
                 output.setTimestamp(LocalDateTime.now());
-                output.setMessage("Add Operator Successfully");
+                output.setMessage("Operator Added Successfully");
                 return output;
         	}
         	else {
-        		throw new DepartmentException("No Department Found");
+        		throw new DepartmentException("No Department Found With DepartmentID : " + dto.getDepartmentId());
         	}
         	
         } else {
@@ -218,8 +279,9 @@ public class AdminServicesImpl implements AdminServices{
 
     //Remove Operator By Id
     @Override
-    public Output removeOperatorById(Integer id) throws AdminException {
-        Optional<Operator> opt = operatorDao.findById(id);
+    public Output removeOperatorById(Integer operatorId) throws AdminException {
+    	
+        Optional<Operator> opt = operatorDao.findById(operatorId);
         Output output = new Output();
 
         if (opt.isPresent()) {
@@ -228,32 +290,101 @@ public class AdminServicesImpl implements AdminServices{
 
             operatorDao.delete(operator);
 
-            output.setMessage("Delete Successfully");
+            output.setMessage("Operator Deleted Successfully");
             output.setTimestamp(LocalDateTime.now());
 
             return output;
 
-        } else
-            throw new AdminException("Operator does not exist with id :" + id);
+        } else {
+            throw new AdminException("Operator does not exist with id :" + operatorId);
+        }
+    
     }
 
 
-    //Update Operator
+    //Update Operator [Subhadeep Bid]
     @Override
     public Output updateOperator(Operator operator) throws AdminException {
 
-        Output output = new Output();
-        if(operator != null) {
-            Operator opt = operatorDao.save(operator);
-            output.setMessage("Update Sucessfully");
-            output.setTimestamp(LocalDateTime.now());
+    	Optional<Operator> opt = operatorDao.findById(operator.getOperatorId());
+    	
+    	if(opt == null) {
+    		throw new AdminException("No Operator Found");
+    	}
+    	else {
+    		Operator operator2 = opt.get();
+    		
+    		if(operator.getLogin() != null) {
+    			if(operator.getLogin().getPassword() != null) {
+    				operator2.getLogin().setPassword(operator.getLogin().getPassword());
+    			}
+    			if(operator.getLogin().getUsername() != null) {
+    				operator2.getLogin().setUsername(operator.getLogin().getUsername());
+    			}
+    		}
+    		if(operator.getOperatorEmail() != null) {
+    			operator2.setOperatorEmail(operator.getOperatorEmail());
+    		}
+    		if(operator.getOperatorFirstName() != null) {
+    			operator2.setOperatorFirstName(operator.getOperatorFirstName());
+    		}
+    		if(operator.getOperatorLastName() != null) {
+    			operator2.setOperatorLastName(operator.getOperatorLastName());
+    		}
+    		if(operator.getOperatorMobile() != null) {
+    			operator2.setOperatorMobile(operator.getOperatorMobile());
+    		}
+    		if(operator.getOperatorType() != null) {
+    			operator2.setOperatorType(operator.getOperatorType());
+    		}
+    		
+    		operatorDao.save(operator2);
+    		
+    		Output output = new Output();
+    		output.setMessage("Update Sucessfully");
+			output.setTimestamp(LocalDateTime.now());
 
-
-            return output;
-        }
-
-
-        throw new AdminException("Operator is null");
+			return output;
+    	}
+    	
+    	
+    	/*
+{
+  "login": {
+    "active": true,
+    "loginId": 0,
+    "password": "string",
+    "type": "ADMIN",
+    "username": "string"
+  },
+  "operatorEmail": "string",
+  "operatorFirstName": "string",
+  "operatorId": 0,
+  "operatorLastName": "string",
+  "operatorMobile": "string",
+  "operatorType": "string",
+  "solutions": [
+    {
+      "solutionDate": "2023-01-21",
+      "solutionDescription": "string",
+      "solutionId": 0
+    }
+  ]
+}
+    	 */
+    	
+    	
+//        Output output = new Output();
+//        if(operator != null) {
+//            Operator opt = operatorDao.save(operator);
+//            output.setMessage("Update Sucessfully");
+//            output.setTimestamp(LocalDateTime.now());
+//
+//            return output;
+//        }
+//
+//
+//        throw new AdminException("Operator is null");
 
     }
 
@@ -261,7 +392,7 @@ public class AdminServicesImpl implements AdminServices{
     //Get Operator By Id
     @Override
     public Operator getOperatorById(Integer id) throws AdminException {
-        return operatorDao.findById(id).orElseThrow(() -> new AdminException("Operator does not exist with id :"+id) );
+        return operatorDao.findById(id).orElseThrow(() -> new AdminException("Operator does not exist with id : "+id) );
     }
 
 

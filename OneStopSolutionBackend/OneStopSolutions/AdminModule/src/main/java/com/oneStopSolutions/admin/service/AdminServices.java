@@ -2,6 +2,7 @@ package com.oneStopSolutions.admin.service;
 
 
 import com.oneStopSolutions.admin.dto.AddOperatorDto;
+import com.oneStopSolutions.admin.dto.RegisterAdminDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public interface AdminServices {
 
-public Output registerAdmin(Admin admin) throws AdminException;
+public Output registerAdmin(RegisterAdminDto dto) throws AdminException, DepartmentException;
     public Admin adminLogin(Login login)throws AdminException;
 
     public Output createDepartment(Department department)throws DepartmentException;

@@ -1,6 +1,7 @@
 package com.oneStopSolutions.admin.controller;
 
 import com.oneStopSolutions.admin.dto.AddOperatorDto;
+import com.oneStopSolutions.admin.dto.RegisterAdminDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -29,9 +30,9 @@ public class AdminController {
     //Register Admin
     
     @PostMapping("/register")
-    public ResponseEntity<Output> registerAdminHandler(@RequestBody Admin admin) throws AdminException{
+    public ResponseEntity<Output> registerAdminHandler(@RequestBody RegisterAdminDto dto) throws AdminException, DepartmentException{
 
-        Output output = adminService.registerAdmin(admin);
+        Output output = adminService.registerAdmin(dto);
 
         return new ResponseEntity<>(output, HttpStatus.CREATED);
     }
