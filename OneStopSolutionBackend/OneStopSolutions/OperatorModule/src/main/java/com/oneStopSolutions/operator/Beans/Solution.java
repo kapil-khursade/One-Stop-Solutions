@@ -13,12 +13,19 @@ import com.oneStopSolutions.customer.customerBeans.Issue;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@NoArgsConstructor
+@Setter
+
+@Getter
+
 @AllArgsConstructor
+
+@NoArgsConstructor
+
 @ToString
 @Entity
 public class Solution {
@@ -29,6 +36,7 @@ public class Solution {
 	private String solutionDescription;
 	private Date solutionDate;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Operator operator;
 	
