@@ -43,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setLastName(dto.getLastName());
 		customer.setEmail(dto.getEmail());
 		customer.setCity(dto.getCity());
+		customer.setMobile(dto.getMobile());
 		customer.setLogin(new Login());
 		customer.getLogin().setUsername(dto.getUsername());
 		customer.getLogin().setPassword(dto.getPassword());
