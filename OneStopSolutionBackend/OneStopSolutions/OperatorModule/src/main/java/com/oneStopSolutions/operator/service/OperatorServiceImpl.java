@@ -18,6 +18,7 @@ import com.oneStopSolutions.customer.repository.IssueRepository;
 import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.exception.OperatorException;
 import com.oneStopSolutions.operator.exception.SolutionException;
 import com.oneStopSolutions.operator.repository.OperatorDao;
@@ -48,14 +49,16 @@ public class OperatorServiceImpl implements OperatorService {
 		if(login2==null) {
 			throw new OperatorException("Account doesn't exist.");
 		}else if(!login2.getPassword().equals(login.getPassword())) {
-			throw new OperatorException("Wrong password.");
+			throw new OperatorException("Wrong password");
 		}
-
-		Operator operator=operatorDao.findByLogin(login);
-		if(operator==null) {
-			throw new OperatorException("Account doesn't exist.");
+		else {
+			Operator operator=operatorDao.findByLogin(login);
+			if(operator==null) {
+				throw new OperatorException("Account doesn't exist.");
+			}
+			return operator;
 		}
-		return operator;
+		
 	}
 
 	@Override
@@ -84,15 +87,26 @@ public class OperatorServiceImpl implements OperatorService {
 	}
 
 	@Override
-	public Output modifyIssueById(Integer issueId, Issue issue) throws OperatorException {
+	public Output modifyIssueById(Integer issueId, ModifyIssueDto dto) throws OperatorException {
 
 		Optional<Issue> opt = issueDao.findById(issueId);
 
 		if (opt.isPresent()) {
-//			Issue existingIssue=opt.get();
-			opt.get();
-//			existingIssue.setIssueDescription(issue.getIssueDescription());
-			issueDao.save(issue);
+			Issue existingIssue=opt.get();
+			
+			if(dto != null) {
+				
+				if(dto.getIssueDescription() != null) {
+					existingIssue.setIssueDescription(dto.getIssueDescription());
+				}
+				if(dto.getIssueType() != null) {
+					existingIssue.setIssueType(dto.getIssueType());
+				}
+				
+				issueDao.save(existingIssue);
+				
+			}
+			
 			return new Output("Issue modified successfully.", LocalDateTime.now());
 		} else {
 			throw new OperatorException("Issue doen't exist with id " + issueId);
