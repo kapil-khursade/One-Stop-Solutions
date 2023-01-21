@@ -10,6 +10,5 @@ import com.oneStopSolutions.operator.Beans.Solution;
 
 @Repository
 public interface SolutionDao extends JpaRepository<Solution, Integer> {
-	
 	public List<Solution> findByIssue(Issue issue);
 }

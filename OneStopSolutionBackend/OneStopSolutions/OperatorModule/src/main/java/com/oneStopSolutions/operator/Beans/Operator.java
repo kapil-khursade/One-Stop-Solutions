@@ -50,8 +50,6 @@ public class Operator {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
-	
-	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operator")
 	private Set<Solution> solutions=new HashSet<Solution>();
 }
