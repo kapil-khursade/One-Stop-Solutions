@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.oneStopSolutions.customer.customerBeans.Issue;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,4 +32,8 @@ public class Solution {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Operator operator;
+	
+	@JsonIgnore
+	@ManyToOne
+	private Issue issue;
 }

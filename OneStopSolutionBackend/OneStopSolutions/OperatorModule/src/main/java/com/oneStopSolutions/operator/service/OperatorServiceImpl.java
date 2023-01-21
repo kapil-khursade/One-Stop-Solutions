@@ -1,12 +1,9 @@
 package com.oneStopSolutions.operator.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,8 +54,10 @@ public class OperatorServiceImpl implements OperatorService {
 			Operator operator=operatorDao.findByLogin(login2);
 			if(operator==null) {
 				throw new OperatorException("Account doesn't exist.");
+			}else {
+				return operator;
 			}
-			return operator;
+			
 		}
 		
 	}
@@ -184,9 +183,28 @@ public class OperatorServiceImpl implements OperatorService {
 	public Output createSolutionToIssue(Integer issueId, Solution solution) throws SolutionException {
 		
 		Optional<Issue> opt = issueDao.findById(issueId);
+//		if(opt.isPresent()) {
+//			Issue issue=opt.get();
+//			Optional<Operator> opt1= operatorDao.findById(solution.getOperator().getOperatorId());
+//			Operator operator=opt1.get();
+//			operator.getSolutions().add(solution);
+//			solution.setIssue(issue);
+//			operatorDao.save(operator);
+//			System.out.println(operator);
+//			solutionDao.save(solution);
+//			return new Output("Solution is created for issue id "+issueId, LocalDateTime.now());
+//		}else {
+//			throw new SolutionException("Issue doesn't exist with id " + issueId);
+//		}
 		
 		if(opt.isPresent()) {
 			Issue issue=opt.get();
+			Operator opt1=operatorDao.findById(solution.getOperator().getOperatorId()).get();
+			Set<Solution> solutions=opt1.getSolutions();
+			solutions.add(solution);
+			opt1.setSolutions(solutions);
+			operatorDao.save(opt1);
+			solution.setIssue(issue);
 			solutionDao.save(solution);
 			return new Output("Solution is created for Issue id " + issueId, LocalDateTime.now());
 		} else {
@@ -203,7 +221,8 @@ public class OperatorServiceImpl implements OperatorService {
 			throw new SolutionException("Issue doen't exist with id " + issueId);
 		} 
 		Issue issue=opt.get();
-		List<Solution> solutions = solutionDao.findAll();
+		List<Solution> solutions = solutionDao.findByIssue(issue);
+		
 		if(solutions.size()==0) {
 			throw new OperatorException("No solution found for "+issueId);
 		}
