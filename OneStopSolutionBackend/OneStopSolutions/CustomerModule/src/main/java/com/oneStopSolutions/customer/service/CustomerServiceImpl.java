@@ -11,7 +11,10 @@ import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.customerBeans.UserType;
+import com.oneStopSolutions.customer.dtoes.CreateIssueDto;
 import com.oneStopSolutions.customer.dtoes.CustomerUpdatePasswordDto;
+import com.oneStopSolutions.customer.dtoes.LoginDto;
+import com.oneStopSolutions.customer.dtoes.RegisterCustomerDto;
 import com.oneStopSolutions.customer.exception.CustomerException;
 import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.exception.LoginException;
@@ -32,14 +35,22 @@ public class CustomerServiceImpl implements CustomerService {
 	private LoginRepository loginRepository;
 
 	@Override
-	public Output registerCustomer(Customer customer) throws CustomerException {
+	public Output registerCustomer(RegisterCustomerDto dto) throws CustomerException {
 
-		customerRepository.save(customer);
-
+		Customer customer = new Customer();
+		
+		customer.setFirstName(dto.getFirstName());
+		customer.setLastName(dto.getLastName());
+		customer.setEmail(dto.getEmail());
+		customer.setCity(dto.getCity());
+		customer.setLogin(new Login());
+		customer.getLogin().setUsername(dto.getUsername());
+		customer.getLogin().setPassword(dto.getPassword());
 		customer.getLogin().setType(UserType.CUSTOMER);
-
 		customer.getLogin().setActive(true);
 
+		customerRepository.save(customer);
+		
 		loginRepository.save(customer.getLogin());
 
 		Output output = new Output();
@@ -50,7 +61,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer customerLogin(Login login) throws LoginException {
+	public Customer customerLogin(LoginDto dto) throws LoginException {
+		
+		Login login = new Login();
+		login.setUsername(dto.getUsername());
+		login.setPassword(dto.getPassword());
+		login.setType(UserType.CUSTOMER);
 
 		Login login2 = loginRepository.findByUsername(login.getUsername());
 
@@ -58,8 +74,11 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new LoginException("No A./c Found");
 		} else if (!login2.getPassword().equals(login.getPassword())) {
 			throw new LoginException("Password Incorrect");
-		} else {
-
+		} 
+		else if(!login2.isActive()) {
+			throw new CustomerException("Customer Not Active");
+		}
+		else {
 			Customer customer = customerRepository.findByLogin(login2);
 
 			if (customer == null) {
@@ -73,7 +92,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Output createIssue(Issue issue, Integer customerId) throws IssueException {
+	public Output createIssue(CreateIssueDto dto, Integer customerId) throws IssueException {
 
 		Optional<Customer> optional = customerRepository.findById(customerId);
 
@@ -83,6 +102,10 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new CustomerException("No Customer Found");
 		}
 		
+		Issue issue = new Issue();
+		
+		issue.setIssueDescription(dto.getIssueDescription());
+		issue.setIssueType(dto.getIssueType());
 		issue.setIssueStatus(false);
 
 		customer.getIssues().add(issue);

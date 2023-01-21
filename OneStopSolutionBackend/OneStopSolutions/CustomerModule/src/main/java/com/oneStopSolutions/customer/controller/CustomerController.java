@@ -18,7 +18,10 @@ import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.dtoes.CreateIssueDto;
 import com.oneStopSolutions.customer.dtoes.CustomerUpdatePasswordDto;
+import com.oneStopSolutions.customer.dtoes.LoginDto;
+import com.oneStopSolutions.customer.dtoes.RegisterCustomerDto;
 import com.oneStopSolutions.customer.service.CustomerService;
 
 @RestController
@@ -29,22 +32,22 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/customers")
-	public ResponseEntity<Output> registerCustomerHandler(@RequestBody Customer customer) {
-		Output output = customerService.registerCustomer(customer);
+	public ResponseEntity<Output> registerCustomerHandler(@RequestBody RegisterCustomerDto customerDto) {
+		Output output = customerService.registerCustomer(customerDto);
 		
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody Login login) {
-		Customer output = customerService.customerLogin(login);
+	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody LoginDto dto) {
+		Customer customer = customerService.customerLogin(dto);
 		
-		return new ResponseEntity<Customer>(output, HttpStatus.ACCEPTED);
+		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping("/issue/{customerId}")
-	public ResponseEntity<Output> createIssueHandler(@PathVariable("customerId") Integer customerId, @RequestBody Issue issue) {
-		Output output = customerService.createIssue(issue, customerId);
+	public ResponseEntity<Output> createIssueHandler(@PathVariable("customerId") Integer customerId, @RequestBody CreateIssueDto dto) {
+		Output output = customerService.createIssue(dto, customerId);
 		
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
