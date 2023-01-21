@@ -1,6 +1,7 @@
 package com.oneStopSolutions.admin.service;
 
 
+import com.oneStopSolutions.admin.dto.AddOperatorDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -8,7 +9,7 @@ import com.oneStopSolutions.admin.model.Department;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
-
+import com.oneStopSolutions.operator.exception.OperatorException;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public Output registerAdmin(Admin admin) throws AdminException;
     public Department getDepartmentById(Integer id) throws DepartmentException;
 
 
-    public Output addOperator(Operator operator)throws AdminException;
+    public Output addOperator(AddOperatorDto dto)throws OperatorException, DepartmentException;
     public Output removeOperatorById(Integer id)throws AdminException;
     public Output updateOperator(Operator operator)throws AdminException;
     public Operator getOperatorById(Integer id)throws AdminException;

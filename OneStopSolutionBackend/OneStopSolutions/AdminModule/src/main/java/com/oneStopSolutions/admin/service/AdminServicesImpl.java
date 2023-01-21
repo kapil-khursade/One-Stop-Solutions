@@ -1,5 +1,6 @@
 package com.oneStopSolutions.admin.service;
 
+import com.oneStopSolutions.admin.dto.AddOperatorDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -11,6 +12,7 @@ import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.customerBeans.UserType;
 import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
+import com.oneStopSolutions.operator.exception.OperatorException;
 import com.oneStopSolutions.operator.repository.OperatorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -170,16 +172,46 @@ public class AdminServicesImpl implements AdminServices{
 
     // Create new Operator
     @Override
-    public Output addOperator(Operator operator) throws AdminException {
+    public Output addOperator(AddOperatorDto dto) throws OperatorException, DepartmentException {
 
-        if (operator != null) {
-            operatorDao.save(operator);
-            Output output = new Output();
-            output.setTimestamp(LocalDateTime.now());
-            output.setMessage("Add Operator Successfully");
-            return output;
+        if (dto != null) {
+        	
+        	Optional<Department> opt = departmentDao.findById(dto.getDepartmentId());
+        	
+        	if(opt != null) {
+        		Department department = opt.get();
+        		
+        		Operator operator = new Operator();
+            	operator.setOperatorFirstName(dto.getOperatorFirstName());
+            	operator.setOperatorLastName(dto.getOperatorLastName());
+            	operator.setOperatorEmail(dto.getOperatorEmail());
+            	operator.setOperatorMobile(dto.getOperatorMobile());
+            	operator.setOperatorType(dto.getOperatorType());
+            	
+            	Login login = new Login();
+            	
+            	login.setUsername(dto.getUsername());
+            	login.setPassword(dto.getPassword());
+            	
+            	operator.setLogin(login);
+            	
+            	
+            	
+        		department.getOperatorList().add(operator);
+        		
+        		departmentDao.save(department);
+        		
+        		Output output = new Output();
+                output.setTimestamp(LocalDateTime.now());
+                output.setMessage("Add Operator Successfully");
+                return output;
+        	}
+        	else {
+        		throw new DepartmentException("No Department Found");
+        	}
+        	
         } else {
-            throw new AdminException("Operator is null...");
+            throw new OperatorException("Fill All the Fields");
         }
     }
 

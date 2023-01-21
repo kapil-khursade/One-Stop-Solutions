@@ -1,5 +1,6 @@
 package com.oneStopSolutions.admin.controller;
 
+import com.oneStopSolutions.admin.dto.AddOperatorDto;
 import com.oneStopSolutions.admin.exception.AdminException;
 import com.oneStopSolutions.admin.exception.DepartmentException;
 import com.oneStopSolutions.admin.model.Admin;
@@ -8,6 +9,8 @@ import com.oneStopSolutions.admin.service.AdminServices;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
+import com.oneStopSolutions.operator.exception.OperatorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,7 +97,7 @@ public class AdminController {
     // Add new Operator
 
     @PostMapping("/operator")
-    public ResponseEntity<Output> addOperatorHandler(@RequestBody Operator operator)throws AdminException{
+    public ResponseEntity<Output> addOperatorHandler(@RequestBody AddOperatorDto operator) throws OperatorException, DepartmentException{
 
         Output output = adminService.addOperator(operator);
 
