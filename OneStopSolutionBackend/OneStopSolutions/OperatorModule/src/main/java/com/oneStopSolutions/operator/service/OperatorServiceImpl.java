@@ -54,7 +54,7 @@ public class OperatorServiceImpl implements OperatorService {
 			throw new OperatorException("Wrong password");
 		}
 		else {
-			Operator operator=operatorDao.findByLogin(login);
+			Operator operator=operatorDao.findByLogin(login2);
 			if(operator==null) {
 				throw new OperatorException("Account doesn't exist.");
 			}
