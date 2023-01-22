@@ -31,6 +31,8 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	
+	// Register A Customer
 	@PostMapping("/customers")
 	public ResponseEntity<Output> registerCustomerHandler(@RequestBody RegisterCustomerDto customerDto) {
 		Output output = customerService.registerCustomer(customerDto);
@@ -38,48 +40,62 @@ public class CustomerController {
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
+	
+	// Customer Login
 	@PostMapping("/login")
 	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody LoginDto dto) {
 		Customer customer = customerService.customerLogin(dto);
 		
 		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
 	}
+
 	
+	// Create An Issue 
 	@PostMapping("/issue/{customerId}")
 	public ResponseEntity<Output> createIssueHandler(@PathVariable("customerId") Integer customerId, @RequestBody CreateIssueDto dto) {
 		Output output = customerService.createIssue(dto, customerId);
 		
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
+
 	
+	// Get All Issue
 	@GetMapping("/issue/all/{customerId}")
 	public ResponseEntity<List<Issue>> getAllIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId) {
 		List<Issue> issues = customerService.getAllIssuesByCustomerId(customerId);
 		
 		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
 	}
+
 	
+	// Get Issue By IssueID
 	@GetMapping("/issue/one/{issueId}")
 	public ResponseEntity<Issue> getIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Issue issue2 = customerService.getIssueId(issueId);
 		
 		return new ResponseEntity<Issue>(issue2, HttpStatus.OK);
 	}
+
 	
+	// Delete Issue By IssueID
 	@DeleteMapping("/issue/{issueId}")
 	public ResponseEntity<Output> deleteIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Output output = customerService.deleteIssueId(issueId);
 		
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
+
 	
+	// Reopen An Issue By IssueID
 	@PutMapping("/issue/{issueId}")
 	public ResponseEntity<Output> reopenIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Output output = customerService.reopenIssueById(issueId);
 		
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
+
 	
+	// Update Customer's Password
 	@PutMapping("/customers/changepassword/{customerId}")
 	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId, @RequestBody CustomerUpdatePasswordDto dto) {
 		Output output = customerService.updatePassword(dto, customerId);

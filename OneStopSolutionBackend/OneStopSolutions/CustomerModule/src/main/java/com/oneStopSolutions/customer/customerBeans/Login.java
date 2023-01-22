@@ -21,18 +21,17 @@ public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer LoginId;
-	
-	@Column(unique = true)
+
+	@Column(unique = true) // VALUES MUST BE UNIQUE
 	private String username;
-	
-	@Column(unique = true)
+
+	@Column(unique = true) // VALUES MUST BE UNIQUE
 	private String password;
-	
-	@Enumerated(EnumType.STRING)
+
+	@Enumerated(EnumType.STRING) // VALUES : [ ADMIN / OPERATOR / CUSTOMER ]
 	private UserType type;
-	
-	@Column(columnDefinition = "BOOLEAN")
+
+	@Column(columnDefinition = "BOOLEAN") // STORES 1 IF true AND 0 IF false
 	private boolean isActive;
-	
-	
+
 }

@@ -22,7 +22,7 @@ public class Issue {
 	public String issueType;
 	public String issueDescription;
 	
-	@Column(columnDefinition = "BOOLEAN")
+	@Column(columnDefinition = "BOOLEAN") // STORES 1 IF true AND 0 IF false
 	public boolean issueStatus;
 
 }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Output {
 
 	private String message;
-	private LocalDateTime timestamp = LocalDateTime.now();
+	private LocalDateTime timestamp = LocalDateTime.now(); // STORES THE CURRENT DATE & TIME
 
 }

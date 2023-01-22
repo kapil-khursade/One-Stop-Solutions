@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class CreateIssueDto {
 	
+	// GETS THE DATA FROM USER TO CREATE AN ISSUE
+	
 	private String issueType;
 	private String issueDescription;
 

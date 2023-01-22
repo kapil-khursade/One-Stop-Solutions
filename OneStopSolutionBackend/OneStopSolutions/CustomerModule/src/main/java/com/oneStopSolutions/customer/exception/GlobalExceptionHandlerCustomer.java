@@ -12,9 +12,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandlerCustomer {
-	
-	// exception handler for customer
-	
+
+	// EXCEPTION HANDLER FOR CUSTOMER
+
 	@ExceptionHandler(CustomerException.class)
 	public ResponseEntity<MyErrorDetailsCustomer> customerExceptionHandler(CustomerException ce, WebRequest req) {
 
@@ -27,9 +27,9 @@ public class GlobalExceptionHandlerCustomer {
 		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
 
 	}
-	
-	// exception handler for issue
-	
+
+	// EXCEPTION HANDLER FOR ISSUE
+
 	@ExceptionHandler(IssueException.class)
 	public ResponseEntity<MyErrorDetailsCustomer> issueExceptionHandler(IssueException ie, WebRequest req) {
 
@@ -42,9 +42,9 @@ public class GlobalExceptionHandlerCustomer {
 		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
 
 	}
-	
-	// exception handler for login
-	
+
+	// EXCEPTION HANDLER FOR LOGIN
+
 	@ExceptionHandler(LoginException.class)
 	public ResponseEntity<MyErrorDetailsCustomer> loginExceptionHandler(LoginException le, WebRequest req) {
 
@@ -57,50 +57,50 @@ public class GlobalExceptionHandlerCustomer {
 		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
 
 	}
-	
-	// generic exception handler
 
-		@ExceptionHandler(Exception.class)
-		public ResponseEntity<MyErrorDetailsCustomer> genericExceptionHandler(Exception e, WebRequest req) {
+	// GENERIC EXCEPTION HANDLER
 
-			MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<MyErrorDetailsCustomer> genericExceptionHandler(Exception e, WebRequest req) {
 
-			err.setTimestamp(LocalDateTime.now());
-			err.setMessage(e.getMessage());
-			err.setDetails(req.getDescription(false));
+		MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
 
-			return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		err.setDetails(req.getDescription(false));
 
-		}
+		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
 
-		// if no exception handler is found
+	}
 
-		@ExceptionHandler(NoHandlerFoundException.class)
-		public ResponseEntity<MyErrorDetailsCustomer> myExceptionHandler(NoHandlerFoundException nhfe, WebRequest req) {
+	// IF NO EXCEPTION HANDLER IS FOUND
 
-			MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<MyErrorDetailsCustomer> myExceptionHandler(NoHandlerFoundException nhfe, WebRequest req) {
 
-			err.setTimestamp(LocalDateTime.now());
-			err.setMessage(nhfe.getMessage());
-			err.setDetails(req.getDescription(false));
+		MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
 
-			return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(nhfe.getMessage());
+		err.setDetails(req.getDescription(false));
 
-		}
+		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
 
-		// if method argument is not valid
+	}
 
-		@ExceptionHandler(MethodArgumentNotValidException.class)
-		public ResponseEntity<MyErrorDetailsCustomer> myMANVExceptionHandler(MethodArgumentNotValidException manve) {
+	// IF METHOD ARGUEMENT IS NOT VALID
 
-			MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<MyErrorDetailsCustomer> myMANVExceptionHandler(MethodArgumentNotValidException manve) {
 
-			err.setTimestamp(LocalDateTime.now());
-			err.setMessage(manve.getBindingResult().getFieldError().getDefaultMessage());
-			err.setDetails("Validation error");
+		MyErrorDetailsCustomer err = new MyErrorDetailsCustomer();
 
-			return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(manve.getBindingResult().getFieldError().getDefaultMessage());
+		err.setDetails("Validation error");
 
-		}
+		return new ResponseEntity<MyErrorDetailsCustomer>(err, HttpStatus.BAD_REQUEST);
+
+	}
 
 }

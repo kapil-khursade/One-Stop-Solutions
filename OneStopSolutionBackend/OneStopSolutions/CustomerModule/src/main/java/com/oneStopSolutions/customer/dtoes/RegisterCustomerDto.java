@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class RegisterCustomerDto {
 
+	// GETS THE DATA FROM USER TO REGISTER A CUSTOMER
+	
 	private String firstName;
 	private String lastName;
 	private String email;

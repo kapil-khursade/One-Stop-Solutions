@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class LoginDto {
 
+	// GETS THE DATA FROM USER FOR LOGIN
+	
 	private String username;
 	private String password;
 	

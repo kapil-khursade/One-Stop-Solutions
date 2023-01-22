@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
-import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.customer.dtoes.CreateIssueDto;
 import com.oneStopSolutions.customer.dtoes.CustomerUpdatePasswordDto;

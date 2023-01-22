@@ -10,6 +10,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CustomerUpdatePasswordDto {
+	
+	// GETS THE DATA FROM USER TO CHANGE THE PASSWORD
 
 	private String oldPassword;
 	private String newPassword;
