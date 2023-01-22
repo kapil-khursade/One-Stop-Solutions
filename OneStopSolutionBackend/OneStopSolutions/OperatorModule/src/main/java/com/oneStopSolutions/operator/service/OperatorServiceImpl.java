@@ -1,12 +1,9 @@
 package com.oneStopSolutions.operator.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +12,13 @@ import com.oneStopSolutions.customer.customerBeans.Customer;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
+import com.oneStopSolutions.customer.exception.IssueException;
 import com.oneStopSolutions.customer.repository.CustomerRepository;
 import com.oneStopSolutions.customer.repository.IssueRepository;
 import com.oneStopSolutions.customer.repository.LoginRepository;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.CreateSolutionDto;
 import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.exception.OperatorException;
 import com.oneStopSolutions.operator.exception.SolutionException;
@@ -57,8 +56,10 @@ public class OperatorServiceImpl implements OperatorService {
 			Operator operator=operatorDao.findByLogin(login2);
 			if(operator==null) {
 				throw new OperatorException("Account doesn't exist.");
+			}else {
+				return operator;
 			}
-			return operator;
+			
 		}
 		
 	}
@@ -122,9 +123,15 @@ public class OperatorServiceImpl implements OperatorService {
 
 		if (opt.isPresent()) {
 			Issue issue = opt.get();
-			issue.setIssueStatus(false);
-			issueDao.save(issue);
-			return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
+			if(issue.isIssueStatus()) {
+				issue.setIssueStatus(false);
+				issueDao.save(issue);
+				return new Output("Issue id " + issueId + " closed successfully.", LocalDateTime.now());
+			}
+			else {
+				throw new IssueException("Issue Already Closed");
+			}
+			
 		} else {
 			throw new OperatorException("Issue doen't exist with id " + issueId);
 		}
@@ -181,17 +188,39 @@ public class OperatorServiceImpl implements OperatorService {
 	}
 
 	@Override
-	public Output createSolutionToIssue(Integer issueId, Solution solution) throws SolutionException {
+	public Output createSolutionToIssue(Integer issueId, Integer operatorId, CreateSolutionDto dto) throws SolutionException {
 		
 		Optional<Issue> opt = issueDao.findById(issueId);
 		
-		if(opt.isPresent()) {
+		if(opt.isEmpty()) {
+			throw new IssueException("No Issue Found With issueId : " + issueId);
+		}
+		else {
 			Issue issue=opt.get();
-			solutionDao.save(solution);
-			return new Output("Solution is created for Issue id " + issueId, LocalDateTime.now());
-		} else {
-			throw new SolutionException("Issue doesn't exist with id " + issueId);
-		} 
+			
+			Optional<Operator> opt1 = operatorDao.findById(operatorId);
+			
+			if(opt1.isEmpty()) {
+				throw new OperatorException("No Operator Found With Operator Id : " + operatorId);
+			}
+			else {
+				Operator operator = opt1.get();
+				
+				Solution solution = new Solution();
+				
+				solution.setIssue(issue);
+				solution.setSolutionDate(dto.getSolutionDate());
+				solution.setSolutionDescription(dto.getSolutionDescription());
+				solution.setOperator(operator);
+				
+				operator.getSolutions().add(solution);
+				
+				operatorDao.save(operator);
+				
+				return new Output("Solution is created for issue id "+issueId, LocalDateTime.now());
+			}
+		}
+		
 	}
 
 	@Override
@@ -203,7 +232,8 @@ public class OperatorServiceImpl implements OperatorService {
 			throw new SolutionException("Issue doen't exist with id " + issueId);
 		} 
 		Issue issue=opt.get();
-		List<Solution> solutions = solutionDao.findAll();
+		List<Solution> solutions = solutionDao.findByIssue(issue);
+		
 		if(solutions.size()==0) {
 			throw new OperatorException("No solution found for "+issueId);
 		}

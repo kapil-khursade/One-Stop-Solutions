@@ -113,7 +113,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//  Extracting Issue details
 		issue.setIssueDescription(dto.getIssueDescription());
 		issue.setIssueType(dto.getIssueType());
-		issue.setIssueStatus(false);
+		issue.setIssueStatus(true);
 
 		// Adding the Issue to Customer
 		customer.getIssues().add(issue);

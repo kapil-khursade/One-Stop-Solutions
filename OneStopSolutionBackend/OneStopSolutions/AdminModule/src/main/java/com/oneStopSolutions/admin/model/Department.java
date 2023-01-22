@@ -17,27 +17,26 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class Department {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer departmentId;
 	private String departmentName;
 
-//bidirection
+	// Bi-direction
 	@JsonIgnore
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
 	private List<Admin> adminList = new ArrayList<>();
 
-//unidirectional
+	// Uni-directional
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
 	@JoinColumn(name = "department_id")
 	private List<Operator> operatorList = new ArrayList<>();
 
-//bidirectional
+	// Bi-directional
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<Admin> employeeList = new ArrayList<>();
-
-//    private Admin admin;
+	private List<Employee> employeeList = new ArrayList<>();
 
 }

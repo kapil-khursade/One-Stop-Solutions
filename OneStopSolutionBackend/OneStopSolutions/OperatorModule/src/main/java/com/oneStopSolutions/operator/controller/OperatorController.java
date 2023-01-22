@@ -21,6 +21,7 @@ import com.oneStopSolutions.customer.customerBeans.Login;
 import com.oneStopSolutions.customer.customerBeans.Output;
 import com.oneStopSolutions.operator.Beans.Operator;
 import com.oneStopSolutions.operator.Beans.Solution;
+import com.oneStopSolutions.operator.dtos.CreateSolutionDto;
 import com.oneStopSolutions.operator.dtos.ModifyIssueDto;
 import com.oneStopSolutions.operator.service.OperatorService;
 
@@ -95,9 +96,9 @@ public class OperatorController {
 	}
 	
 	//To create Solution To Issue by Id
-	@PostMapping("solution/{issueId}")
-	public ResponseEntity<Output> createSolutionToIssueHandler(@PathVariable("issueId") Integer issueId, @RequestBody Solution solution){
-		Output output = operatorService.createSolutionToIssue(issueId, solution);
+	@PostMapping("solution/{issueId}/{operatorId}")
+	public ResponseEntity<Output> createSolutionToIssueHandler(@PathVariable("issueId") Integer issueId, @PathVariable("operatorId") Integer operatorId, @RequestBody CreateSolutionDto dto){
+		Output output = operatorService.createSolutionToIssue(issueId, operatorId, dto);
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
