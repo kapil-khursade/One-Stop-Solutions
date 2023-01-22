@@ -1,6 +1,5 @@
 package com.oneStopSolutions.admin.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +13,15 @@ import javax.persistence.*;
 @Entity
 @ToString
 public class Employee {
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
-private Integer employeeId;
-private String firstName;
-private String lastName;
 
-//bidirectional
-@ManyToOne(cascade = CascadeType.ALL)
-private Department department;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer employeeId;
+	private String firstName;
+	private String lastName;
+
+	// Bi-directional
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Department department;
+
 }
