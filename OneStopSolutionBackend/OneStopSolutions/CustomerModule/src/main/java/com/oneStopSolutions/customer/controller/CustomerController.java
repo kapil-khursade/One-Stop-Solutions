@@ -27,63 +27,65 @@ import com.oneStopSolutions.customer.service.CustomerService;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
-	@PostMapping("/customers")
+
+	@PostMapping("/register")
 	public ResponseEntity<Output> registerCustomerHandler(@RequestBody RegisterCustomerDto customerDto) {
 		Output output = customerService.registerCustomer(customerDto);
-		
+
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<Customer> loginCustomerHandler(@RequestBody LoginDto dto) {
 		Customer customer = customerService.customerLogin(dto);
-		
+
 		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
 	}
-	
+
 	@PostMapping("/issue/{customerId}")
-	public ResponseEntity<Output> createIssueHandler(@PathVariable("customerId") Integer customerId, @RequestBody CreateIssueDto dto) {
+	public ResponseEntity<Output> createIssueHandler(@PathVariable("customerId") Integer customerId,
+			@RequestBody CreateIssueDto dto) {
 		Output output = customerService.createIssue(dto, customerId);
-		
+
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/issue/all/{customerId}")
 	public ResponseEntity<List<Issue>> getAllIssueByCustomerIdHandler(@PathVariable("customerId") Integer customerId) {
 		List<Issue> issues = customerService.getAllIssuesByCustomerId(customerId);
-		
+
 		return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/issue/one/{issueId}")
 	public ResponseEntity<Issue> getIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Issue issue2 = customerService.getIssueId(issueId);
-		
+
 		return new ResponseEntity<Issue>(issue2, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/issue/{issueId}")
 	public ResponseEntity<Output> deleteIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Output output = customerService.deleteIssueId(issueId);
-		
+
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/issue/{issueId}")
 	public ResponseEntity<Output> reopenIssueByIssueIdHandler(@PathVariable("issueId") Integer issueId) {
 		Output output = customerService.reopenIssueById(issueId);
-		
+
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/customers/changepassword/{customerId}")
-	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId, @RequestBody CustomerUpdatePasswordDto dto) {
+	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId,
+			@RequestBody CustomerUpdatePasswordDto dto) {
 		Output output = customerService.updatePassword(dto, customerId);
-		
+
 		return new ResponseEntity<Output>(output, HttpStatus.OK);
 	}
 
