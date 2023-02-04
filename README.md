@@ -62,6 +62,6 @@ The goal of the project is to streamline the process of resolving electronic iss
 
 ## Deployed Front End
 
-<a href="onestopsolutions.netlify.app/">Link</a>
+<a href="https://onestopsolutions.netlify.app/">Link</a>
 
 
