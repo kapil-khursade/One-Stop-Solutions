@@ -30,7 +30,7 @@ Online Service Center services using the spring boot and java 8.
 * Postman
 * Swagger
 * Validatoion
-* Lombook
+* Lombok
 
 ## Module Wise Functionality
 
@@ -45,7 +45,7 @@ Online Service Center services using the spring boot and java 8.
 * View Issue by id/ type
 * View Customer by Firstname/Email/Id
 * Create Solution
-* View Solurtion by Id, Issue Id.
+* View Solution by Id, Issue Id.
 
 ### Admin 
 * Login/Register
