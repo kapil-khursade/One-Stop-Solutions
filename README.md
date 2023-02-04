@@ -13,7 +13,7 @@ The goal of the project is to streamline the process of resolving electronic iss
 ![online call center](https://user-images.githubusercontent.com/107981122/214225488-3a2427c9-e23b-4b0d-9b99-c2e357118b75.png)
 
 
-## Team
+## Team Members
 
 * Kapil Khursade (Team Lead)
 * Shubadeep Bid
