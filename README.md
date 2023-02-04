@@ -1,9 +1,14 @@
 # One-Stop-Solutions
-Online Service Center services using the spring boot and java 8.
 
 ![OneStopSolution](https://user-images.githubusercontent.com/107981122/214225417-3a528f1a-aca4-4d36-99bd-1262a646c460.png)
 
-## Entity Relations Diagramme.
+# Introduction
+<p>
+One-Stop Solutions is a Java-based application designed to streamline customer service for electronic issues. Customers can create and track issues with ease, while operators handle and resolve the issues efficiently. With CustomerCare, customers can expect a seamless and hassle-free experience in resolving their electronic problems. The application provides a centralized platform for managing electronic issues, making it a one-stop solution for all customer service needs. CustomerCare elevates the customer experience by providing a fast, reliable and effective solution to electronic issues.
+
+The goal of the project is to streamline the process of resolving electronic issues for customers and assign operator to particular issues by admin and make it easier for operators to manage and resolve these issues efficiently. The project provides a user-friendly interface for customers to report their issues. One Stop Solution is designed to enhance the customer experience by providing a fast, reliable and effective solution to electronic issues, making it the one-stop solution for all customer service needs.
+
+## Entity Relationship Diagram.
 
 ![online call center](https://user-images.githubusercontent.com/107981122/214225488-3a2427c9-e23b-4b0d-9b99-c2e357118b75.png)
 
@@ -32,7 +37,7 @@ Online Service Center services using the spring boot and java 8.
 * Validatoion
 * Lombok
 
-## Module Wise Functionality
+## Module Wise Functionalities
 
 ### Customer
 * Login/Registration
@@ -57,8 +62,6 @@ Online Service Center services using the spring boot and java 8.
 
 ## Deployed Front End
 
-[Link]
+<a href="onestopsolutions.netlify.app/">Link</a>
 
-## Vedio Demonstration
 
-[Link]
