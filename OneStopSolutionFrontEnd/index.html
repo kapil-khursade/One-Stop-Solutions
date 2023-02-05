@@ -2,56 +2,139 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/Title Logo.png" type="image/png" />
-    <script src="https://kit.fontawesome.com/f426985a11.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>One Stop Solutions</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&family=Montserrat:wght@100;700&family=Poppins:wght@500;600&family=Raleway:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="responsive.css">
+
+    <!-- adding font awsome icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://kit.fontawesome.com/32f181d7c4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/57be80f6a1.js" crossorigin="anonymous"></script>
+
+    <!-- Adding cursive -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <!-- javacript -->
+    <script src="index.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <navbar>
+    
+    <nav>
+        <div id="nav">
+            <div>
+                <img src="resources/OneStopSolution.png" alt="logo">
+            </div>
+            <span>One Stop Solutions To All Your Tech Problem</span>
+            <div id="bgForm"  class="bgForm">
+                <span onclick="closeBox()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </nav>
+ 
+    <main>
         <div>
-            <div class="navbar">
-                <img src="images/onestopsolutionnabarlogo.png" alt="">
+            <div onclick="mainBox(this);closeForm()">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <h1>Customer</h1>
+                <div class="logRegi">
+                    <div onclick="closeBox();openForm('customerLogin')"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</div> 
+                    <div onclick="closeBox();openForm('customerRegi')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Register</div>
+                </div>
+            </div>
+            <div onclick="mainBox(this);closeForm()">
+                <i class="fa fa-phone-square" aria-hidden="true"></i>
+                <h1>Operator</h1>
+                <div class="logRegi">
+                    <div onclick="closeBox();openForm('operatorLogin')"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</div> 
+                </div>
+            </div>
+            <div onclick="mainBox(this);closeForm()">
+                <i class="fa fa-id-badge" aria-hidden="true"></i>
+                <h1>Admin</h1>
+                <div class="logRegi">
+                    <div onclick="closeBox();openForm('adminLogin')"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</div> 
+                    <div onclick="closeBox();openForm('adminRegi')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Register</div>
+                </div>
+            </div>
+            <div id="contact">
+                <div>Find Us Here</div>
                 <div>
-                    <li>
-                        <button class="consumerBtn">For Consumer</button>
-                        <ul class="consumerMenu">
-                            <li><a href="customerLogin.html">Login</a></li>
-                            <li><a href="customerRegister.html">Register</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button class="buisnessBtn">For Buisness</button>
-                        <ul class="buisnessMenu">
-                            <li><a href="">Admin</a></li>
-                            <li><a href="">Operator</a></li>
-                        </ul>
-                    </li>
-                    <!-- <button class="loginBtn"><i class="fa-solid fa-user"></i></button> -->
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-whatsapp" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
-    </navbar>
-    <section class="home" >
-        <div style="background-image: url('images/customersupport.jpg'); background-size: cover; height:100%;">
-            <p>We`re here for you</p>
-            <h1>Welcome to One Stop Solutions</h1>
-        </div>
-    </section> 
-    <footer>
-        <div>
-            <p>Contact Us</p>
-            <div>
-                <p><i class="fa-brands fa-facebook"></i></p>
-                <p><i class="fa-brands fa-twitter"></i></p>
-                <p><i class="fa-brands fa-whatsapp"></i></p>
-                <p><i class="fa-brands fa-instagram"></i></p>
-                <p><i class="fa-brands fa-linkedin"></i></p>
-            </div>
-        </div>
-    </footer>
+    </main>
+
+    <article>
+        <form id="customerLogin" class="formCss">
+            <span onclick="closeForm()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Customer Login" onclick="customerLoginForm(event)">
+        </form>
+
+        <form id="operatorLogin" class="formCss">
+            <span onclick="closeForm()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Operator Login" onclick="operatorLoginForm(event)">
+        </form>
+
+        <form id="adminLogin" class="formCss">
+            <span onclick="closeForm()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Admin Login" onclick="adminLoginForm(event)">
+        </form>
+
+        <form id="customerRegi" class="formCss">
+            <span onclick="closeForm()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            <label>FirstName</label>
+            <input type="text" name="firstname" required>
+            <label>LastName</label>
+            <input type="text" name="lastname" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Mobile</label>
+            <input type="text" name="mobile" required>
+            <label>City</label>
+            <input type="text" name="city" required>
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Register Customer" onclick="customerRegiForm(event)">
+        </form>
+
+        <form id="adminRegi" class="formCss">
+            <span onclick="closeForm()"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+            <label>FirstName</label>
+            <input type="text" name="firstname" required>
+            <label>LastName</label>
+            <input type="text" name="lastname" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Department ID</label>
+            <input type="number" name="deptID" required>
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Register Admin" onclick="adminRegiForm(event)">
+        </form>
+
+    </article>
 </body>
 </html>

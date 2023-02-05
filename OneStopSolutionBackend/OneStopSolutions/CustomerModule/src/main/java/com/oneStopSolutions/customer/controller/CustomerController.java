@@ -96,7 +96,7 @@ public class CustomerController {
 
 
 	// Update Customer's Password
-	@PutMapping("/customers/changepassword/{customerId}")
+	@PutMapping("/changepassword/{customerId}")
 	public ResponseEntity<Output> updatePasswordHandler(@PathVariable("customerId") Integer customerId,
 			@RequestBody CustomerUpdatePasswordDto dto) {
 		Output output = customerService.updatePassword(dto, customerId);

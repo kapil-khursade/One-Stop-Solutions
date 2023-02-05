@@ -55,6 +55,7 @@ section>div>span{
     width: 250px;
     margin-top: 25px;
     text-align: left;
+    border: 1px solid red;
 }
 
 .custFormCss>textarea{
@@ -73,11 +74,12 @@ section>div>span{
     margin-top: 15px;
     border: none;
     outline: none;
+    border: 1px solid red;
 }
 
 .custFormCss>input:last-child{
     background-color: rgb(17, 17, 99);
-    width: 40%;
+    width: fit-content;
     margin-left:30%;
     color: #fff;
     border: none;

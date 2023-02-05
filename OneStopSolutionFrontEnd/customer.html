@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Customer</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="responsive.css">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <script src="https://kit.fontawesome.com/32f181d7c4.js" crossorigin="anonymous"></script>
 
-    <script src="customer.js"></script>
+    
 
 </head>
 <body>
@@ -33,6 +33,10 @@
             <span>Customer Profile</span>
           <table>
             <tbody id="profile">
+                <tr>
+                    <td>Customer Id</td>
+                    <td>Id</td>
+                </tr>
                 <tr>
                     <td>First Name:</td>
                     <td>Kapil</td>
@@ -58,51 +62,25 @@
         </div>
 
         <div id="issues">
-            <span onclick="openTable('issues'); viewCustomerIssue()">View Issues</span>
+            <span onclick="openTable('issues'); viewCustomerIssue(event)">View Issues</span>
             <table class="hide">
                 <thead>
                     <td>Id</td>
-                    <td>Issue</td>
-                    <td>Type</td>
+                    <td>Issue Type</td>
+                    <td>Descreption</td>
                     <td>Status</td>
                 </thead>
                 <tbody id="issueTbody">
                     <tr>
+                        <td>No Issues Exist</td>
+                    </tr>
+                    <!-- <tr>
                         <td>1</td>
                         <td>xyz</td>
                         <td>fdsf</td>
                         <td>fgsdfgs</td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>xyz</td>
-                        <td>fdsf</td>
-                        <td>fgsdfgs</td>
-                    </tr>
+                    -->
                 </tbody>
             </table>
         </div>
@@ -112,17 +90,17 @@
             <form class="custFormCss hide" >
                 <label>Issue Type</label>
                 <select name="type">
-                    <option value="">Select Type</option>
-                    <option value="">Television</option>
-                    <option value="">Mobile</option>
-                    <option value="">Laptop</option>
-                    <option value="">Watch</option>
-                    <option value="">Airpods</option>
-                    <option value="">I Pad</option>
+                    <option value="Select Type">Select Type</option>
+                    <option value="Television">Television</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Watch">Watch</option>
+                    <option value="Airpods">Airpods</option>
+                    <option value="I Pad">I Pad</option>
                 </select>
                 <label>Descreption</label>
-                <textarea type="password" name="decription" maxlength="255"></textarea>
-                <input type="submit" value="Create Issue" onclick="createCustomerIssue()">
+                <textarea type="text" name="decription" maxlength="255"></textarea>
+                <input type="submit" value="Create Issue" onclick="createCustomerIssue(event)">
             </form>
         </div>
 
@@ -133,16 +111,16 @@
                 <input type="text" name="oldPassword">
                 <label>New Password</label>
                 <input type="text" name="newPassword">
-                <input type="submit" value="Update" onclick="updateCustomerIssue()">
+                <input type="submit" value="Update" onclick="updateCustomerPassword(event)">
             </form>
         </div>
 
         <div id="issueById">
-            <span onclick="openTable('issueById')">Get Issue By Id</span>
+            <span onclick="openCustForm('issueById')">Get Issue By Id</span>
             <form class="custFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId">
-                <input type="submit" value="Get Issue" onclick="openTable('issueById')">
+                <input type="submit" value="Get Issue" onclick="getIssueById(event)">
             </form>
             <table class="hide">
                 <thead>
@@ -181,3 +159,5 @@
 
 </body>
 </html>
+
+<script src="customer.js"></script>

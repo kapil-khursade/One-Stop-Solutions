@@ -17,6 +17,7 @@ function logOutCustomer(){
 
     if(sure){
         alert("Loging You Out");
+        localStorage.removeItem("cust");
         window.location.href="index.html";
     }
 }
@@ -34,19 +35,144 @@ function deleteCustomer(){
 // fetching customer profile
 function getCustomerProfile(){
 
+    let customer = JSON.parse(localStorage.getItem('cust'));
+
+    document.getElementById("profile").innerHTML=null;
+    
+    document.getElementById("profile").innerHTML=
+    `<tr>
+        <td>Customer Id</td>
+        <td>${customer.customerId}</td>
+    </tr>
+    <tr>
+        <td>First Name:</td>
+        <td>${customer.firstName}</td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td>${customer.lastName}</td>
+    </tr>
+    <tr>
+        <td>Phone:</td>
+        <td>${customer.mobile}</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>${customer.email}</td>
+    </tr>
+    <tr>
+        <td>City:</td>
+        <td>${customer.city}</td>
+    </tr>`
 }
+getCustomerProfile();
 
 // View Customer Issue
-function viewCustomerIssue(){
+function viewCustomerIssue(event){
+    event.preventDefault();
+    let customer = JSON.parse(localStorage.getItem('cust'));
 
+    const viewCustomerIssue = async() =>{
+        let p = await fetch(`http://localhost:8880/customer/issue/all/${customer.customerId}`);
+        let response = await p.json();
+        if(response.length>0){
+                document.getElementById("issueTbody").innerHTML=null;
+
+            for(i=0; i<response.length; i++){
+                document.getElementById("issueTbody").innerHTML+=
+                `<tr>
+                    <td>${response[i].issueId}</td>
+                    <td>${response[i].issueType}</td>
+                    <td>${response[i].issueDescription}</td>
+                    <td>${response[i].issueStatus?"Open":"Close"}</td>
+                </tr>`;
+            }
+        }
+    }
+
+    viewCustomerIssue();
 }
 
 // Cerate Customer Issue
-function createCustomerIssue(){
+function createCustomerIssue(event){
+    event.preventDefault();
 
+    let isseCreateForm = document.querySelector("#createIssue>form");
+
+    const createIssue = async() =>{
+        let options = {
+            method: "POST",
+            headers: {
+                    "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                "issueType":isseCreateForm.type.value,
+                "issueDescription":isseCreateForm.decription.value
+            }),
+        }
+
+        let customer = JSON.parse(localStorage.getItem('cust'));
+        let p = await fetch(`http://localhost:8880/customer/issue/${customer.customerId}`, options)
+        let response = await p.json();
+        alert(response.message);
+    }
+
+    createIssue();
 }
 
 // Update Customer Password
-function updateCustomerIssue(){
+function updateCustomerPassword(event){
+    event.preventDefault();
 
+    let customer = JSON.parse(localStorage.getItem('cust'));
+    let updateCustomerPasswordForm = document.querySelector("#updatePassword>form");
+
+    const updatePassord = async() =>{
+        let options = {
+            method: "PUT",
+            headers: {
+                    "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                "oldPassword":updateCustomerPasswordForm.oldPassword.value,
+                "newPassword":updateCustomerPasswordForm.newPassword.value
+            }),
+        }
+
+        let customer = JSON.parse(localStorage.getItem('cust'));
+        let p = await fetch(`http://localhost:8880/customer/changepassword/${customer.customerId}`, options);
+        let response = await p.json();
+        alert(response.message);
+    }
+
+    updatePassord();
 }
+
+// Get Issue by Id;
+function getIssueById(event){
+    event.preventDefault();
+
+    let getIssueByIdForm = document.querySelector("#issueById>form");
+
+    const getIssueById = async() =>{
+       
+        let p = await fetch(`http://localhost:8880/customer/issue/one/${getIssueByIdForm.issueId.value}`);
+        let response = await p.json();
+
+        if(response.message!=undefined){
+            alert(response.message);
+        }else{
+            openTable("issueById");
+            document.querySelector("#issueById>table>tbody").innerHTML=
+                `<tr>
+                    <td>${response.issueId}</td>
+                    <td>${response.issueType}</td>
+                    <td>${response.issueDescription}</td>
+                    <td>${response.issueStatus?"Open":"Close"}</td>
+                </tr>`;
+        }
+    }
+
+    getIssueById();
+}
+
