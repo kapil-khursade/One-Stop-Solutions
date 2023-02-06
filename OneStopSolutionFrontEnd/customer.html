@@ -24,7 +24,6 @@
             </div>
             <div id="options">
                 <li onclick="logOutCustomer()"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
-                <li onclick="deleteCustomer()"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
             </div>
         </div>
     </nav>
@@ -63,6 +62,7 @@
 
         <div id="issues">
             <span onclick="openTable('issues'); viewCustomerIssue(event)">View Issues</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeTable('issues')"></i>
             <table class="hide">
                 <thead>
                     <td>Id</td>
@@ -87,6 +87,7 @@
 
         <div id="createIssue">
             <span onclick="openCustForm('createIssue')">Create Issue</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('createIssue')"></i>
             <form class="custFormCss hide" >
                 <label>Issue Type</label>
                 <select name="type">
@@ -106,6 +107,7 @@
 
         <div id="updatePassword">
             <span onclick="openCustForm('updatePassword')">Update Password</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('updatePassword')"></i>
             <form class="custFormCss hide" >
                 <label>Old Password</label>
                 <input type="text" name="oldPassword">
@@ -117,6 +119,7 @@
 
         <div id="issueById">
             <span onclick="openCustForm('issueById')">Get Issue By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('issueById');closeTable('issueById')"></i>
             <form class="custFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId">
@@ -135,23 +138,23 @@
             </table>
         </div>
 
-        <div id="modifyIssue">
-            <span onclick="openCustForm('modifyIssue')">Modify Issue</span>
+        <div id="deleteIssue">
+            <span onclick="openCustForm('deleteIssue')">Delete Issue</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('deleteIssue')"></i>
             <form class="custFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId" placeholder="Enter Id">
-                <label>Descreption</label>
-                <textarea type="password" name="decription" maxlength="255" placeholder="Enter Description"></textarea>
-                <input type="submit" value="Modify Issue" onclick="createCustomerIssue()">
+                <input type="submit" value="Delete Issue" onclick="deleteCustomerIssue(event)">
             </form>
         </div>
 
         <div id="reOpenIssue">
             <span onclick="openCustForm('reOpenIssue')">Reopen Issue</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('reOpenIssue')"></i>
             <form class="custFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId" placeholder="Enter Id">
-                <input type="submit" value="Reopen Issue">
+                <input type="submit" value="Reopen Issue" onclick="reopenCustomerIssue(event)">
             </form>
         </div>
 

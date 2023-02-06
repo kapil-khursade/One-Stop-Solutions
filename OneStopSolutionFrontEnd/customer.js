@@ -10,6 +10,16 @@ function openCustForm(id){
     window.location.href="#"+id;
 }
 
+// close table
+function closeTable(id){
+    document.querySelector("#"+id+">table").classList.add("hide");
+}
+
+// close Form
+function closeForm(id){
+    document.querySelector("#"+id+">Form").classList.add("hide");
+}
+
 
 // Logout customer 
 function logOutCustomer(){
@@ -115,6 +125,9 @@ function createCustomerIssue(event){
         let p = await fetch(`http://localhost:8880/customer/issue/${customer.customerId}`, options)
         let response = await p.json();
         alert(response.message);
+
+        isseCreateForm.type.value='',
+        isseCreateForm.decription.value=''
     }
 
     createIssue();
@@ -143,6 +156,9 @@ function updateCustomerPassword(event){
         let p = await fetch(`http://localhost:8880/customer/changepassword/${customer.customerId}`, options);
         let response = await p.json();
         alert(response.message);
+
+        updateCustomerPasswordForm.oldPassword.value='',
+        updateCustomerPasswordForm.newPassword.value=''
     }
 
     updatePassord();
@@ -159,6 +175,8 @@ function getIssueById(event){
         let p = await fetch(`http://localhost:8880/customer/issue/one/${getIssueByIdForm.issueId.value}`);
         let response = await p.json();
 
+        getIssueByIdForm.issueId.value='';
+
         if(response.message!=undefined){
             alert(response.message);
         }else{
@@ -174,5 +192,51 @@ function getIssueById(event){
     }
 
     getIssueById();
+}
+
+// delete Issue by Id
+function deleteCustomerIssue(event){
+    event.preventDefault();
+
+    const deleteCustomerIssueForm = document.querySelector("#deleteIssue>form");
+
+    const deleteCustomerIssue = async() =>{
+        let options = {
+            method: "DELETE",
+            headers: {
+                    "Content-type": "application/json"
+            }
+        }
+
+        let p = await fetch(`http://localhost:8880/customer/issue/${deleteCustomerIssueForm.issueId.value}`, options);
+        let response = await p.json();
+        alert(response.message);
+        deleteCustomerIssueForm.issueId.value='';
+    }
+
+    deleteCustomerIssue();
+}
+
+// Reopening the issue
+function reopenCustomerIssue(event){
+    event.preventDefault();
+
+    const reopenCustomerIssueForm = document.querySelector("#reOpenIssue>form");
+
+    const reopenCustomerIssue = async() =>{
+        let options = {
+            method: "PUT",
+            headers: {
+                    "Content-type": "application/json"
+            }
+        }
+
+        let p = await fetch(`http://localhost:8880/customer/issue/${reopenCustomerIssueForm.issueId.value}`, options);
+        let response = await p.json();
+        alert(response.message);
+        reopenCustomerIssueForm.issueId.value='';
+    }
+
+    reopenCustomerIssue();
 }
 

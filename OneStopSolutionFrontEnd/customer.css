@@ -51,11 +51,18 @@ section>div>span{
     cursor: pointer;
 }
 
+/* closing the table and form */
+div>i:hover{
+    transform: scale(1.1);
+    color: red;
+    cursor: pointer;
+}
+
 .custFormCss{
     width: 250px;
+    margin: auto;
     margin-top: 25px;
     text-align: left;
-    border: 1px solid red;
 }
 
 .custFormCss>textarea{
@@ -74,7 +81,6 @@ section>div>span{
     margin-top: 15px;
     border: none;
     outline: none;
-    border: 1px solid red;
 }
 
 .custFormCss>input:last-child{
@@ -91,11 +97,4 @@ section>div>span{
 
 #profile {
     text-align: left;
-}
-
-#issueById input{
-    width: 60px;
-    height: 40px;
-    border: none;
-    outline: none;
 }

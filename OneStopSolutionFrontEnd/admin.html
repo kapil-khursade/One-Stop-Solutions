@@ -59,53 +59,61 @@
         </div>
 
         <div id="getAllDepart">
-            <span onclick="openTable('getAllDepart')">Get All Department</span>
+            <span onclick="openTable('getAllDepart');getAllDepartment()">Get All Department</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeTable('getAllDepart')"></i>
             <table class="hide">
                 <thead>
                     <td>Id</td>
                     <td>Name</td>
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td>No Department</td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="createDepart">
             <span onclick="openAdmiForm('createDepart')">Create Department</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('createDepart')"></i>
             <form class="admiFormCss hide">
                 <label>Department Name</label>
-                <input type="text" name="departmentName">
-                <input type="submit" value="Create">
+                <input type="text" name="departmentName" required>
+                <input type="submit" value="Create" onclick="createDept(event)">
             </form>
         </div>
 
         <div id="deleteDepart">
             <span onclick="openAdmiForm('deleteDepart')">Delete Department</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('deleteDepart')"></i>
             <form class="admiFormCss hide">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
-                <input type="submit" value="Delete">
+                <input type="number" name="departmentId" required>
+                <input type="submit" value="Delete" onclick="deleteDepart(event)">
             </form>
         </div>
 
         <div id="updateDepart">
             <span onclick="openAdmiForm('updateDepart')">Update Department</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('updateDepart')"></i>
             <form class="admiFormCss hide">
                 <label>Department Id</label>
                 <input type="number" name="departmentId">
                 <label>Department Name</label>
                 <input type="text" name="departmentName">
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" onclick="updateDepart(event)">
             </form>
         </div>
 
         <div id="getDepartById">
             <span onclick="openAdmiForm('getDepartById')">Get Department By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getDepartById');closeTable('getDepartById')"></i>
             <form class="admiFormCss hide">
                 <label>Department Id</label>
                 <input type="number" name="departmentId">
-                <input type="submit" value="Get" onclick="openTable('getDepartById')">
+                <input type="submit" value="Get" onclick="getDeptById(event)">
             </form>
             <table class="hide">
                 <thead>
@@ -113,48 +121,53 @@
                     <td>Name</td>
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="createOperator">
             <span onclick="openAdmiForm('createOperator')">Create Operator</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('createOperator')"></i>
             <form class="admiFormCss hide">
                 <label>FirstName</label>
-                <input type="text" name="firstname">
+                <input type="text" name="firstname" required>
                 <label>LastName</label>
-                <input type="text" name="lastname">
+                <input type="text" name="lastname" required>
                 <label>Email</label>
-                <input type="email" name="email">
+                <input type="email" name="email" required>
                 <label>Mobile</label>
-                <input type="text" name="mobile">
-                <label>City</label>
-                <input type="text" name="city">
-                <label>Username</label>
-                <input type="text" name="username">
-                <label>Password</label>
-                <input type="password" name="password">
+                <input type="text" name="mobile" required>
                 <label>Operator Type</label>
-                <select name="type">
+                <select name="type" required>
                     <option value="">Select Type</option>
-                    <option value="">Television</option>
-                    <option value="">Mobile</option>
-                    <option value="">Laptop</option>
-                    <option value="">Watch</option>
-                    <option value="">Airpods</option>
-                    <option value="">I Pad</option>
+                    <option value="Television">Television</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Watch">Watch</option>
+                    <option value="Airpods">Airpods</option>
+                    <option value="I Pad">I Pad</option>
                 </select>
-                <input type="submit" value="Register Operator">
+                <label>Department Id</label>
+                <input type="number" name="deptId" required>
+                <label>Username</label>
+                <input type="text" name="username" required>
+                <label>Password</label>
+                <input type="password" name="password" required>
+                <input type="submit" value="Register Operator" onclick="createOperator(event)">
             </form>
         </div>
 
         <div id="getOperById">
             <span onclick="openAdmiForm('getOperById')">Get Operator By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getOperById');closeTable('getOperById')"></i>
             <form class="admiFormCss hide">
                 <label>Department Id</label>
-                <input type="number" name="departmentId">
-                <input type="submit" value="Get" onclick="openTable('getOperById')">
+                <input type="number" name="operatorId">
+                <input type="submit" value="Get" onclick="getOperatorById(event)">
             </form>
             <table class="hide">
                 <thead>
@@ -162,16 +175,25 @@
                     <td>First Name</td>
                     <td>Last Name</td>
                     <td>Phone</td>
+                    <td>UserName</td>
+                    <td>Password</td>
                     <td>Type</td>
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="getAllOperById">
-            <span onclick="openTable('getAllOperById')">Get All Operator</span>
+            <span onclick="getAllOperator()">Get All Operator</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeTable('getAllOperById')"></i>
             <table class="hide">
                 <thead>
                     <td>Id</td>
@@ -181,9 +203,21 @@
                     <td>Type</td>
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td>No Operators Added</td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div id="deleteOperById">
+            <span onclick="openAdmiForm('deleteOperById')">Delete Operator By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('deleteOperById');closeTable('getOperById')"></i>
+            <form class="admiFormCss hide">
+                <label>Department Id</label>
+                <input type="number" name="operatorId" required>
+                <input type="submit" value="Delete" onclick="deleteOperatorById(event)">
+            </form>
         </div>
 
     </section>

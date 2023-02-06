@@ -54,6 +54,13 @@ section>div>span{
     text-align: left;
 }
 
+/* closing the table and form */
+div>i:hover{
+    transform: scale(1.1);
+    color: red;
+    cursor: pointer;
+}
+
 .admiFormCss{
     width: 250px;
     margin: 25px auto auto auto;

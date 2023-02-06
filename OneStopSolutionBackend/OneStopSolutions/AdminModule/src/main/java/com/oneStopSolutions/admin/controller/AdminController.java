@@ -67,8 +67,8 @@ public class AdminController {
 
     //Update Department Name By Id
 
-    @PatchMapping("/departments/{id}")
-    public ResponseEntity<Output> updateDepratmentNameByIdHandler(@PathVariable("id") Integer id, @RequestParam String name)throws DepartmentException{
+    @PatchMapping("/departments/{id}/{name}")
+    public ResponseEntity<Output> updateDepratmentNameByIdHandler(@PathVariable("id") Integer id, @PathVariable("name") String name)throws DepartmentException{
 
         Output output = adminService.updateDepartmentNameById(id,name);
         return new ResponseEntity<>(output, HttpStatus.ACCEPTED);
