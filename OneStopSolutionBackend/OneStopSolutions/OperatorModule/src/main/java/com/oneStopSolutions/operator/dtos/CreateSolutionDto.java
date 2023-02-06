@@ -1,6 +1,6 @@
 package com.oneStopSolutions.operator.dtos;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +14,6 @@ import lombok.ToString;
 public class CreateSolutionDto {
 	
 	private String solutionDescription;
-	private Date solutionDate;
+	private LocalDate solutionDate;
 
 }

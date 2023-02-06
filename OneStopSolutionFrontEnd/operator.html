@@ -59,38 +59,45 @@
 
         <div id="issueByCustId">
             <span onclick="openOpeForm('issueByCustId')">Get Issue By Customer Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeTable('issueByCustId');closeForm('issueByCustId')"></i>
             <form class="operFormCss hide">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Issue" onclick="openTable('issueByCustId')">
+                <input type="number" name="customerId" placeholder="Enter Customer Id" required>
+                <input type="submit" value="Get Issue" onclick="getIssueCustId(event)">
             </form>
             <table class="hide">
                 <thead>
                     <td>Id</td>
-                    <td>Issue</td>
+                    <td>Description</td>
                     <td>Type</td>
                     <td>Status</td>
                 </thead>
                 <tbody>
-                   
+                   <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                   </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="issueByType">
             <span onclick="openOpeForm('issueByType')">Get Issues By Type</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeTable('issueByType');closeForm('issueByType')"></i>
             <form class="operFormCss hide">
                 <label>Select Issue Type</label>
-                <select name="type">
+                <select name="type" required>
                     <option value="">Select Type</option>
-                    <option value="">Television</option>
-                    <option value="">Mobile</option>
-                    <option value="">Laptop</option>
-                    <option value="">Watch</option>
-                    <option value="">Airpods</option>
-                    <option value="">I Pad</option>
+                    <option value="Television">Television</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Watch">Watch</option>
+                    <option value="Airpods">Airpods</option>
+                    <option value="I Pad">I Pad</option>
                 </select>
-                <input type="submit" value="Get Issue" onclick="openTable('issueByType')">
+                <input type="submit" value="Get Issue" onclick="getIssuesByType(event)">
             </form>
             <table class="hide">
                 <thead>
@@ -107,46 +114,57 @@
 
         <div id="closeByIssueId">
             <span onclick="openOpeForm('closeByIssueId')">Close Issue</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('closeByIssueId')"></i>
             <form class="operFormCss hide">
-                <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Issue">
+                <label>Issue Id</label>
+                <input type="number" name="issueId" placeholder="Enter Issue Id">
+                <input type="submit" value="Close Issue" onclick="closeIssueById(event)">
             </form>
         </div>
        
         <div id="getCustById">
             <span onclick="openOpeForm('getCustById')">Get Customer By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getCustById');closeTable('getCustById')"></i>
             <form class="operFormCss hide">
                 <label>Customer Id</label>
                 <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Customer" onclick="openTable('getCustById')">
+                <input type="submit" value="Get Customer" onclick="getCustById(event)">
             </form>
 
             <table class="hide">
                 <thead>
                     <td>Id</td>
                     <td>First Name</td>
+                    <td>Last Name</td>
                     <td>Phone</td>
                     <td>Email</td>
                 </thead>
                 <tbody>
-
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="getCustByFirstname">
             <span onclick="openOpeForm('getCustByFirstname')">Get Customer By FirstName</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getCustByFirstname');closeTable('getCustByFirstname')"></i>
             <form class="operFormCss hide">
                 <label>Customer Id</label>
-                <input type="number" name="customerId" placeholder="Enter Customer FirstName">
-                <input type="submit" value="Get Customer" onclick="openTable('getCustByFirstname')">
+                <input type="text" name="firstName" placeholder="Enter Customer FirstName">
+                <input type="submit" value="Get Customer" onclick="getCustByFirstName(event)">
             </form>
 
             <table class="hide">
                 <thead>
                     <td>Id</td>
                     <td>First Name</td>
+                    <td>Last Name</td>
                     <td>Phone</td>
                     <td>Email</td>
                 </thead>
@@ -158,16 +176,18 @@
 
         <div id="getCustByEmail">
             <span onclick="openOpeForm('getCustByEmail')">Get Customer By Email</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getCustByEmail');closeTable('getCustByEmail')"></i>
             <form class="operFormCss hide">
                 <label>Customer Email</label>
-                <input type="text" name="customerId" placeholder="Enter Customer Email">
-                <input type="submit" value="Get Customer" onclick="openTable('getCustByEmail')">
+                <input type="text" name="email" placeholder="Enter Customer Email">
+                <input type="submit" value="Get Customer" onclick="getCustByEmail(event)">
             </form>
 
             <table class="hide">
                 <thead>
                     <td>Id</td>
                     <td>First Name</td>
+                    <td>Last Name</td>
                     <td>Phone</td>
                     <td>Email</td>
                 </thead>
@@ -179,10 +199,11 @@
 
         <div id="lockCustomer">
             <span onclick="openOpeForm('lockCustomer')">lock Customer</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('lockCustomer')"></i>
             <form class="operFormCss hide">
                 <label>Customer Id</label>
                 <input type="number" name="customerId" placeholder="Enter Customer Id">
-                <input type="submit" value="Get Customer" onclick="openTable('lockCustomer')">
+                <input type="submit" value="Lock Customer" onclick="lockCustomerById(event)">
             </form>
 
             <table class="hide">
@@ -200,40 +221,47 @@
 
         <div id="createSolution">
             <span onclick="openOpeForm('createSolution')">Create Solution</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('createSolution')"></i>
             <form class="operFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId">
                 <label>Solution Description</label>
                 <textarea name="description" maxlength="225"></textarea>
-                <input type="submit" value="Create Soultion">
+                <input type="submit" value="Create Soultion" onclick="createSolution(event)">
             </form>
         </div>
 
         <div id="getSolutionByIssueId">
             <span onclick="openOpeForm('getSolutionByIssueId')">Get Solutions Of IssueId</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('getSolutionByIssueId');closeTable('getSolutionByIssueId')"></i>
             <form class="operFormCss hide">
                 <label>Issue Id</label>
                 <input type="number" name="issueId">
-                <input type="submit" value="Get Solution" onclick="openTable('getSolutionByIssueId')">
+                <input type="submit" value="Get Solution" onclick="getSolutionById(event)">
             </form>
 
             <table class="hide">
                 <thead>
                     <td>Id</td>
                     <td>Description</td>
+                    <td>Date</td>
                 </thead>
                 <tbody>
-
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="deleteSoulById">
             <span onclick="openOpeForm('deleteSoulById')">Delete Solution By Id</span>
+            <i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeForm('deleteSoulById')"></i>
             <form class="operFormCss hide">
                 <label>Solution Id</label>
                 <input type="number" name="solutionId">
-                <input type="submit" value="Delete Solution">
+                <input type="submit" value="Delete Solution" onclick="deleteSolutionById(event)">
             </form>
         </div>
 

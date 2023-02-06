@@ -271,3 +271,42 @@ const deleteOperatorById = async(event)=>{
     let response = await p.json();
     alert(response.message);
 }
+
+// Update Opeartor
+const updateOperator = async(event)=>{
+    event.preventDefault();
+    const getDeptByIdForm = document.querySelector("#updateOperator>form");
+
+    let options = {
+        method: "PUT",
+        headers: {
+                "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            'operatorId':getDeptByIdForm.operatorId.value,
+            'operatorFirstName':getDeptByIdForm.firstname.value,
+            'operatorLastName':getDeptByIdForm.lastname.value,
+            'operatorEmail':getDeptByIdForm.email.value,
+            'operatorMobile':getDeptByIdForm.mobile.value,
+            'operatorType':getDeptByIdForm.type.value,
+            'departmentId':getDeptByIdForm.deptId.value,
+            'login':{
+            'username':getDeptByIdForm.username.value,
+            'password':getDeptByIdForm.password.value,
+            }
+        })
+    }
+
+    let p = await fetch(`http://localhost:8880/admin/operator`, options);
+    let response = await p.json();
+    alert(response.message);
+    getDeptByIdForm.operatorId.value='';
+    getDeptByIdForm.firstname.value='';
+    getDeptByIdForm.lastname.value='';
+    getDeptByIdForm.email.value='';
+    getDeptByIdForm.mobile.value='';
+    getDeptByIdForm.type.value='';
+    getDeptByIdForm.deptId.value='';
+    getDeptByIdForm.username.value='';
+    getDeptByIdForm.password.value='';
+}

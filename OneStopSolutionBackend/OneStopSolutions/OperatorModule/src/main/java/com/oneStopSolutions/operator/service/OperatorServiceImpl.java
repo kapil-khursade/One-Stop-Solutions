@@ -1,6 +1,8 @@
 package com.oneStopSolutions.operator.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -209,7 +211,7 @@ public class OperatorServiceImpl implements OperatorService {
 				Solution solution = new Solution();
 				
 				solution.setIssue(issue);
-				solution.setSolutionDate(dto.getSolutionDate());
+				solution.setSolutionDate(LocalDate.now());
 				solution.setSolutionDescription(dto.getSolutionDescription());
 				solution.setOperator(operator);
 				

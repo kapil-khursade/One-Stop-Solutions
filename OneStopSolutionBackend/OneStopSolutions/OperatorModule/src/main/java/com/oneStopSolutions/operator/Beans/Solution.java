@@ -1,6 +1,7 @@
 package com.oneStopSolutions.operator.Beans;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.oneStopSolutions.customer.customerBeans.Issue;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +34,7 @@ public class Solution {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int solutionId;
 	private String solutionDescription;
-	private Date solutionDate;
+	private LocalDate solutionDate;
 	
 	@JsonIgnore
 	@ManyToOne

@@ -82,7 +82,7 @@ public class OperatorController {
 	}
 	
 	//To get Customer By Email
-	@GetMapping("customer/e/{email}")
+	@GetMapping("/customer/e/{email}")
 	public ResponseEntity<Customer> getCustomerByEmailHandler(@PathVariable("email") String email){
 		Customer customer=operatorService.getCustomerByEmail(email);
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
@@ -96,21 +96,21 @@ public class OperatorController {
 	}
 	
 	//To create Solution To Issue by Id
-	@PostMapping("solution/{issueId}/{operatorId}")
+	@PostMapping("/solution/{issueId}/{operatorId}")
 	public ResponseEntity<Output> createSolutionToIssueHandler(@PathVariable("issueId") Integer issueId, @PathVariable("operatorId") Integer operatorId, @RequestBody CreateSolutionDto dto){
 		Output output = operatorService.createSolutionToIssue(issueId, operatorId, dto);
 		return new ResponseEntity<Output>(output, HttpStatus.CREATED);
 	}
 	
 	//To get All Solution To Issue by Id
-	@GetMapping("solutions/{issueId}")
+	@GetMapping("/solutions/{issueId}")
 	public ResponseEntity<List<Solution>> getAllSolutionToIssueHandler(@PathVariable("issueId") Integer issueId){
 		List<Solution> solutions=operatorService.getAllSolutionToIssue(issueId);
 		return new ResponseEntity<List<Solution>>(solutions, HttpStatus.OK);
 	}
 	
 	//To delete Solution By Id
-	@DeleteMapping("solution/{solutionId}")
+	@DeleteMapping("/solution/{solutionId}")
 	public ResponseEntity<Output> deleteSolutionByIdHandler(@PathVariable("solutionId") Integer solutionId){
 		Output output = operatorService.deleteSolutionById(solutionId);
 		return new ResponseEntity<Output>(output, HttpStatus.ACCEPTED);
