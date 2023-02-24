@@ -314,3 +314,7 @@ const deleteSolutionById = async(event)=>{
     forms.solutionId.value='';
     alert(response.message);
 }
+
+
+
+
