@@ -34,7 +34,7 @@ The goal of the project is to streamline the process of resolving electronic iss
 * Maven
 * Postman
 * Swagger
-* Validatoion
+* Validation
 * Lombok
 
 ## Module Wise Functionalities
