@@ -31,6 +31,7 @@ The goal of the project is to streamline the process of resolving electronic iss
 ### Back End
 * Java-8
 * Spring Boot
+* MySQL
 * Maven
 * Postman
 * Swagger
